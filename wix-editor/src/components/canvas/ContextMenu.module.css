@@ -1,0 +1,82 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+}
+
+.menu {
+    position: fixed;
+    min-width: 200px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: var(--space-xs) 0;
+    z-index: 1000;
+    animation: fadeIn 0.1s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.menu button {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    font-size: 13px;
+    color: var(--text-primary);
+    background: transparent;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+.menu button:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.menu button svg {
+    width: 16px;
+    height: 16px;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+}
+
+.menu button span {
+    flex: 1;
+}
+
+.shortcut {
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+.divider {
+    height: 1px;
+    background: var(--border-light);
+    margin: var(--space-xs) 0;
+}
+
+.deleteBtn {
+    color: #dc3545 !important;
+}
+
+.deleteBtn:hover {
+    background-color: rgba(220, 53, 69, 0.1) !important;
+}
+
+.deleteBtn svg {
+    color: #dc3545 !important;
+}
