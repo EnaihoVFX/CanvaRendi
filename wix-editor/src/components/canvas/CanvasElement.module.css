@@ -5,6 +5,147 @@
     transition: box-shadow var(--transition-fast), opacity var(--transition-fast);
 }
 
+/* Entrance Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes rotateIn {
+    from {
+        transform: rotate(-180deg) scale(0.5);
+        opacity: 0;
+    }
+
+    to {
+        transform: rotate(0) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+
+    70% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.animate-fade-in {
+    animation-name: fadeIn;
+}
+
+.animate-slide-up {
+    animation-name: slideInUp;
+}
+
+.animate-slide-down {
+    animation-name: slideInDown;
+}
+
+.animate-slide-left {
+    animation-name: slideInLeft;
+}
+
+.animate-slide-right {
+    animation-name: slideInRight;
+}
+
+.animate-scale-up {
+    animation-name: scaleIn;
+}
+
+.animate-rotate-in {
+    animation-name: rotateIn;
+}
+
+.animate-bounce-in {
+    animation-name: bounceIn;
+}
+
+.hasAnimation {
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+
 .element.preview {
     cursor: default;
 }
@@ -117,7 +258,7 @@
     height: 100%;
     padding: 8px;
     outline: none;
-    overflow: hidden;
+    overflow: visible;
     word-wrap: break-word;
 }
 
@@ -1048,4 +1189,553 @@
     background: #f3f4f6;
     color: #9ca3af;
     font-size: 12px;
+}
+
+/* ===== CARD CONTENT (Product / Blog) ===== */
+.cardContent {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.cardImage {
+    width: 100%;
+    height: 60%;
+    background: #f1f5f9;
+    position: relative;
+    overflow: hidden;
+}
+
+.cardImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cardInfo {
+    padding: 12px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cardName,
+.blogTitle {
+    font-weight: 600;
+    font-size: 16px;
+    color: #1e293b;
+    margin-bottom: 4px;
+}
+
+.cardPrice {
+    font-weight: 700;
+    color: #116DFF;
+    font-size: 15px;
+}
+
+.cardRating {
+    color: #fbbf24;
+    font-size: 14px;
+    display: flex;
+    gap: 2px;
+}
+
+.cardBtn {
+    margin-top: auto;
+    padding: 8px;
+    background: #116DFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.cardBtn:hover {
+    background: #0055d4;
+}
+
+.blogDate {
+    font-size: 12px;
+    color: #64748b;
+    margin-bottom: 4px;
+}
+
+.blogExcerpt {
+    font-size: 12px;
+    color: #475569;
+    line-height: 1.5;
+    flex: 1;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.blogLink {
+    font-size: 13px;
+    color: #116DFF;
+    font-weight: 500;
+    margin-top: 12px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.blogLink:hover {
+    text-decoration: underline;
+}
+
+/* ===== TABLE ===== */
+.tableContent {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.tableContent table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.tableContent th {
+    background: #f8fafc;
+    text-align: left;
+    padding: 10px 12px;
+    font-weight: 600;
+    color: #475569;
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+}
+
+.tableContent td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #334155;
+    vertical-align: middle;
+}
+
+.tableContent tr:last-child td {
+    border-bottom: none;
+}
+
+/* ===== PRICE ===== */
+.priceTag {
+    font-size: 24px;
+    font-weight: 700;
+    color: #116DFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* ===== CART BUTTON ===== */
+.cartBtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #116DFF;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: none;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.cartBtn:hover {
+    background: #0055d4;
+}
+
+.cartBtn svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* ===== EMBED / HTML / MAP ===== */
+.embedContent,
+.mapContent {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    background: #f8fafc;
+}
+
+.embedPlaceholder,
+.mapPlaceholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #f1f5f9;
+    color: #64748b;
+    gap: 12px;
+    padding: 20px;
+    text-align: center;
+}
+
+.embedPlaceholder svg,
+.mapPlaceholder svg {
+    width: 40px;
+    height: 40px;
+    opacity: 0.5;
+}
+
+.embedHint {
+    font-size: 12px;
+    opacity: 0.7;
+    margin-top: 4px;
+}
+
+.htmlContainer {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+/* ===== TESTIMONIAL ===== */
+.testimonialContent {
+    width: 100%;
+    height: 100%;
+    padding: 24px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.testimonialQuote {
+    position: relative;
+    padding-left: 20px;
+}
+
+.testimonialQuote svg {
+    position: absolute;
+    top: -4px;
+    left: -8px;
+    width: 24px;
+    height: 24px;
+    color: #e5e7eb;
+    fill: #e5e7eb;
+}
+
+.testimonialQuote p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #374151;
+    font-style: italic;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.testimonialAuthor {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.testimonialAvatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.testimonialAvatarPlaceholder {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+}
+
+.testimonialInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.testimonialInfo strong {
+    font-size: 14px;
+    color: #111827;
+}
+
+.testimonialInfo span {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+/* ===== TEAM MEMBER ===== */
+.teamMemberContent {
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.teamMemberImage {
+    height: 60%;
+    width: 100%;
+    background: #f9fafb;
+}
+
+.teamMemberImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.teamMemberPlaceholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3f4f6;
+    color: #9ca3af;
+}
+
+.teamMemberPlaceholder svg {
+    width: 64px;
+    height: 64px;
+}
+
+.teamMemberInfo {
+    padding: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.teamMemberInfo h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.teamMemberRole {
+    font-size: 13px;
+    color: #116DFF;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+}
+
+.teamMemberInfo p {
+    font-size: 13px;
+    color: #6b7280;
+    margin: 8px 0 12px;
+    line-height: 1.4;
+}
+
+.teamMemberSocial {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.teamMemberSocial svg {
+    width: 18px;
+    height: 18px;
+    color: #9ca3af;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.teamMemberSocial svg:hover {
+    color: #116DFF;
+}
+
+/* ===== PROGRESS BAR ===== */
+.progressBarContent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.progressBarLabel {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.progressBarTrack {
+    width: 100%;
+    background: #e5e7eb;
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.progressBarFill {
+    height: 100%;
+    border-radius: 99px;
+    transition: width 0.5s ease-out;
+}
+
+/* ===== COUNTDOWN ===== */
+.countdownContent {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.countdownItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.countdownValue {
+    font-size: 32px;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1;
+}
+
+.countdownLabel {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #6b7280;
+    margin-top: 4px;
+    letter-spacing: 1px;
+}
+
+/* Circles Style */
+.countdownCircles .countdownItem {
+    width: 80px;
+}
+
+.countdownCircles .countdownValue {
+    width: 70px;
+    height: 70px;
+    border: 3px solid #116DFF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+/* Blocks Style */
+.countdownBlocks .countdownItem {
+    width: 70px;
+}
+
+.countdownBlocks .countdownValue {
+    width: 60px;
+    height: 60px;
+    background: #1f2937;
+    color: white;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+/* ===== ALERT ===== */
+.alertContent {
+    width: 100%;
+    height: 100%;
+    padding: 12px 16px;
+    border-left: 4px solid;
+    border-radius: 4px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.alertIcon {
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.alertIcon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.alertText {
+    flex: 1;
+}
+
+.alertText strong {
+    display: block;
+    font-size: 14px;
+    color: #1e293b;
+    margin-bottom: 2px;
+}
+
+.alertText p {
+    font-size: 13px;
+    color: #475569;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.alertClose {
+    color: #94a3b8;
+    cursor: pointer;
+}
+
+.alertClose svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* ===== BADGE ===== */
+.badgeContent {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 0 12px;
+}
+
+.badgeContent svg {
+    width: 14px;
+    height: 14px;
 }

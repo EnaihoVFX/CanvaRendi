@@ -283,21 +283,49 @@ export default function SiteDesignPanel() {
                                     className={styles.presetBtn}
                                     style={{ background: '#FFFFFF' }}
                                     onClick={() => setThemeColor('background', '#FFFFFF')}
+                                    title="Pure White"
                                 />
                                 <button
                                     className={styles.presetBtn}
-                                    style={{ background: '#F8F9FA' }}
-                                    onClick={() => setThemeColor('background', '#F8F9FA')}
+                                    style={{ background: '#F8FAFC' }}
+                                    onClick={() => setThemeColor('background', '#F8FAFC')}
+                                    title="Snow"
                                 />
                                 <button
                                     className={styles.presetBtn}
-                                    style={{ background: '#1A1A2E' }}
-                                    onClick={() => setThemeColor('background', '#1A1A2E')}
+                                    style={{ background: '#F1F5F9' }}
+                                    onClick={() => setThemeColor('background', '#F1F5F9')}
+                                    title="Soft Gray"
                                 />
                                 <button
                                     className={styles.presetBtn}
-                                    style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}
-                                    onClick={() => setThemeColor('background', '#667eea')}
+                                    style={{ background: '#FFFBEB' }}
+                                    onClick={() => setThemeColor('background', '#FFFBEB')}
+                                    title="Warm Cream"
+                                />
+                                <button
+                                    className={styles.presetBtn}
+                                    style={{ background: '#FDF4FF' }}
+                                    onClick={() => setThemeColor('background', '#FDF4FF')}
+                                    title="Lavender Mist"
+                                />
+                                <button
+                                    className={styles.presetBtn}
+                                    style={{ background: '#ECFDF5' }}
+                                    onClick={() => setThemeColor('background', '#ECFDF5')}
+                                    title="Mint Fresh"
+                                />
+                                <button
+                                    className={styles.presetBtn}
+                                    style={{ background: '#0F172A' }}
+                                    onClick={() => setThemeColor('background', '#0F172A')}
+                                    title="Midnight"
+                                />
+                                <button
+                                    className={styles.presetBtn}
+                                    style={{ background: '#1E293B' }}
+                                    onClick={() => setThemeColor('background', '#1E293B')}
+                                    title="Slate Dark"
                                 />
                             </div>
                         </div>

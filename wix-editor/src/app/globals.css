@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 
 /* ===== Wix Design System Tokens ===== */
 :root {
@@ -6,39 +9,39 @@
   --wix-blue: #116DFF;
   --wix-blue-hover: #0057E5;
   --wix-blue-light: #E7F0FF;
-  
+
   /* Selection */
   --selection-blue: #0047FF;
   --selection-handle: #116DFF;
-  
+
   /* Backgrounds */
   --bg-editor: #F1F2F4;
   --bg-panel: #FFFFFF;
   --bg-canvas: #FFFFFF;
   --bg-sidebar: #FFFFFF;
   --bg-topbar: #FFFFFF;
-  
+
   /* Text */
   --text-primary: #20303C;
   --text-secondary: #6D7175;
   --text-disabled: #B4B7BC;
-  
+
   /* Borders */
   --border-light: #DFE1E6;
   --border-medium: #C1C4C9;
   --border-focus: #116DFF;
-  
+
   /* Grid & Guides */
   --grid-line: rgba(0, 0, 0, 0.08);
   --guide-line: #FF00FF;
   --snap-line: #116DFF;
-  
+
   /* Shadows */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
   --shadow-panel: 0 0 20px rgba(0, 0, 0, 0.1);
-  
+
   /* Spacing */
   --space-xs: 4px;
   --space-sm: 8px;
@@ -46,18 +49,18 @@
   --space-lg: 16px;
   --space-xl: 24px;
   --space-2xl: 32px;
-  
+
   /* Sizing */
   --topbar-height: 55px;
   --sidebar-width: 60px;
   --panel-width: 280px;
-  
+
   /* Border Radius */
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-full: 9999px;
-  
+
   /* Transitions */
   --transition-fast: 0.15s ease;
   --transition-normal: 0.25s ease;
@@ -65,7 +68,9 @@
 }
 
 /* ===== Global Reset ===== */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -73,7 +78,7 @@
 
 /* ===== Body ===== */
 body {
-  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-inter), sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: var(--text-primary);
@@ -84,7 +89,12 @@ body {
 }
 
 /* ===== Typography ===== */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 600;
   line-height: 1.3;
 }
@@ -185,12 +195,38 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ===== Utility Classes ===== */
-.flex { display: flex; }
-.flex-col { flex-direction: column; }
-.items-center { align-items: center; }
-.justify-center { justify-content: center; }
-.justify-between { justify-content: space-between; }
-.gap-xs { gap: var(--space-xs); }
-.gap-sm { gap: var(--space-sm); }
-.gap-md { gap: var(--space-md); }
-.gap-lg { gap: var(--space-lg); }
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-xs {
+  gap: var(--space-xs);
+}
+
+.gap-sm {
+  gap: var(--space-sm);
+}
+
+.gap-md {
+  gap: var(--space-md);
+}
+
+.gap-lg {
+  gap: var(--space-lg);
+}

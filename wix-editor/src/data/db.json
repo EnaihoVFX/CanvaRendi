@@ -1,0 +1,2846 @@
+{
+  "sites": {
+    "demo-site": {
+      "name": "My Site",
+      "pages": [
+        {
+          "id": "home",
+          "name": "Home",
+          "slug": "/",
+          "isHomePage": true,
+          "sections": [
+            {
+              "id": "hero-section",
+              "name": "Hero",
+              "height": 850,
+              "backgroundColor": "#FAFAF5",
+              "elements": [
+                "hero-title",
+                "hero-sub",
+                "hero-btn-primary",
+                "hero-btn-secondary",
+                "hero-image"
+              ]
+            },
+            {
+              "id": "story-section",
+              "name": "Our Story",
+              "height": 600,
+              "backgroundColor": "#FFFFFF",
+              "elements": [
+                "story-image",
+                "story-title",
+                "story-text"
+              ]
+            },
+            {
+              "id": "testimonial-section",
+              "name": "Testimonials",
+              "height": 500,
+              "backgroundColor": "#2C1810",
+              "elements": [
+                "testimonial-quote",
+                "testimonial-text",
+                "testimonial-author"
+              ]
+            }
+          ],
+          "minHeight": 1950,
+          "height": 2239
+        },
+        {
+          "id": "menu",
+          "name": "Menu",
+          "slug": "/menu",
+          "isHomePage": false,
+          "sections": [
+            {
+              "id": "menu-hero",
+              "name": "Menu Header",
+              "height": 400,
+              "backgroundColor": "#FAFAF5",
+              "elements": []
+            }
+          ],
+          "minHeight": 600,
+          "height": 800
+        }
+      ],
+      "elements": {
+        "hero-title": {
+          "id": "hero-title",
+          "type": "heading",
+          "pageId": "home",
+          "bounds": {
+            "x": 76,
+            "y": 182,
+            "width": 600,
+            "height": 203
+          },
+          "zIndex": 20,
+          "props": {
+            "content": "Artisan Coffee,\nRoasted Locally.",
+            "fontSize": 96,
+            "fontFamily": "Playfair Display",
+            "fontWeight": 800,
+            "color": "#2C1810",
+            "textAlign": "left",
+            "lineHeight": 1.05,
+            "letterSpacing": -2
+          },
+          "locked": false,
+          "hidden": false
+        },
+        "hero-sub": {
+          "id": "hero-sub",
+          "type": "paragraph",
+          "pageId": "home",
+          "bounds": {
+            "x": 85,
+            "y": 400,
+            "width": 480,
+            "height": 100
+          },
+          "zIndex": 20,
+          "props": {
+            "content": "Experience the rich, bold flavors of ethically sourced beans, roasted small-batch right here in Seattle. Every cup is crafted with passion and precision.",
+            "fontSize": 20,
+            "fontFamily": "Inter",
+            "fontWeight": 400,
+            "color": "#5D4037",
+            "textAlign": "left",
+            "lineHeight": 1.6
+          },
+          "locked": false,
+          "hidden": false
+        },
+        "hero-btn-primary": {
+          "id": "hero-btn-primary",
+          "type": "button",
+          "pageId": "home",
+          "bounds": {
+            "x": 80,
+            "y": 530,
+            "width": 220,
+            "height": 64
+          },
+          "zIndex": 20,
+          "props": {
+            "label": "Order Online",
+            "backgroundColor": "#2C1810",
+            "textColor": "#FFFFFF",
+            "borderRadius": 0,
+            "borderWidth": 0,
+            "borderColor": "transparent",
+            "fontSize": 18,
+            "fontWeight": 600,
+            "letterSpacing": 1
+          },
+          "locked": false,
+          "hidden": false
+        },
+        "hero-btn-secondary": {
+          "id": "hero-btn-secondary",
+          "type": "button",
+          "pageId": "home",
+          "bounds": {
+            "x": 330,
+            "y": 530,
+            "width": 200,
+            "height": 64
+          },
+          "zIndex": 20,
+          "props": {
+            "label": "View Menu",
+            "backgroundColor": "transparent",
+            "textColor": "#2C1810",
+            "borderRadius": 0,
+            "borderWidth": 2,
+            "borderColor": "#2C1810",
+            "fontSize": 18,
+            "fontWeight": 600,
+            "letterSpacing": 1
+          },
+          "locked": false,
+          "hidden": false
+        },
+        "hero-image": {
+          "id": "hero-image",
+          "type": "image",
+          "pageId": "home",
+          "bounds": {
+            "x": 630,
+            "y": 78,
+            "width": 650,
+            "height": 750
+          },
+          "zIndex": 10,
+          "props": {
+            "src": "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=2071&auto=format&fit=crop",
+            "alt": "Pour Over Coffee",
+            "objectFit": "cover",
+            "borderRadius": 0
+          },
+          "locked": false,
+          "hidden": false
+        },
+        "story-image": {
+          "id": "story-image",
+          "type": "image",
+          "pageId": "home",
+          "bounds": {
+            "x": 0,
+            "y": 850,
+            "width": 700,
+            "height": 600
+          },
+          "zIndex": 5,
+          "props": {
+            "src": "https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=1974&auto=format&fit=crop",
+            "alt": "Our Cafe Interior",
+            "objectFit": "cover",
+            "borderRadius": 0
+          },
+          "locked": false,
+          "hidden": false
+        },
+        "story-title": {
+          "id": "story-title",
+          "type": "heading",
+          "pageId": "home",
+          "bounds": {
+            "x": 748,
+            "y": 950,
+            "width": 500,
+            "height": 80
+          },
+          "zIndex": 10,
+          "props": {
+            "content": "Our Story",
+            "fontSize": 56,
+            "fontFamily": "Playfair Display",
+            "fontWeight": 700,
+            "color": "#2C1810",
+            "textAlign": "left"
+          },
+          "locked": false,
+          "hidden": false
+        },
+        "story-text": {
+          "id": "story-text",
+          "type": "paragraph",
+          "pageId": "home",
+          "bounds": {
+            "x": 746,
+            "y": 1050,
+            "width": 500,
+            "height": 300
+          },
+          "zIndex": 10,
+          "props": {
+            "content": "Founded in 2018, Bean & Brew began with a simple mission: to serve the perfect cup. We source our beans directly from sustainable farms in Ethiopia and Colombia, roasting them in-house to unlock their full potential.\n\nOur flagship store in downtown Seattle is designed to be your sanctuary—a place to pause, sip, and savor.",
+            "fontSize": 18,
+            "fontFamily": "Inter",
+            "fontWeight": 400,
+            "color": "#4B5563",
+            "textAlign": "left",
+            "lineHeight": 1.8
+          },
+          "locked": false,
+          "hidden": false
+        },
+        "testimonial-quote": {
+          "id": "testimonial-quote",
+          "type": "text",
+          "pageId": "home",
+          "bounds": {
+            "x": 600,
+            "y": 1550,
+            "width": 100,
+            "height": 100
+          },
+          "zIndex": 10,
+          "props": {
+            "content": "“",
+            "fontSize": 120,
+            "fontFamily": "Playfair Display",
+            "fontWeight": 400,
+            "color": "#D4A373",
+            "textAlign": "center",
+            "lineHeight": 1
+          },
+          "locked": false,
+          "hidden": false
+        },
+        "testimonial-text": {
+          "id": "testimonial-text",
+          "type": "paragraph",
+          "pageId": "home",
+          "bounds": {
+            "x": 300,
+            "y": 1680,
+            "width": 700,
+            "height": 150
+          },
+          "zIndex": 10,
+          "props": {
+            "content": "The best morning brew in the city. Absolutely love the atmosphere! The baristas know exactly how to pull the perfect shot.",
+            "fontSize": 32,
+            "fontFamily": "Playfair Display",
+            "fontWeight": 500,
+            "color": "#FFFFFF",
+            "textAlign": "center",
+            "lineHeight": 1.5
+          },
+          "locked": false,
+          "hidden": false
+        },
+        "testimonial-author": {
+          "id": "testimonial-author",
+          "type": "text",
+          "pageId": "home",
+          "bounds": {
+            "x": 450,
+            "y": 1850,
+            "width": 400,
+            "height": 40
+          },
+          "zIndex": 10,
+          "props": {
+            "content": "SARAH JENKINS — LOCAL GUIDE",
+            "fontSize": 14,
+            "fontFamily": "Inter",
+            "fontWeight": 700,
+            "letterSpacing": 2,
+            "color": "#D4A373",
+            "textAlign": "center"
+          },
+          "locked": false,
+          "hidden": false
+        },
+        "4733601a-b0e6-41ec-89e3-d5c43a7c0b1c": {
+          "type": "box",
+          "bounds": {
+            "x": 165.22219848632812,
+            "y": 1548.1736450195312,
+            "width": 963,
+            "height": 400
+          },
+          "props": {
+            "backgroundColor": "#5a1a07",
+            "borderRadius": 20,
+            "shadow": "lg",
+            "backdropBlur": true
+          },
+          "locked": false,
+          "hidden": false,
+          "id": "4733601a-b0e6-41ec-89e3-d5c43a7c0b1c",
+          "zIndex": 3,
+          "pageId": "home"
+        },
+        "5dbc98a4-c9c0-48b2-a29b-70c4f1d9b27a": {
+          "type": "navbar",
+          "bounds": {
+            "x": 0,
+            "y": 3,
+            "width": 1279,
+            "height": 54
+          },
+          "props": {
+            "style": "horizontal",
+            "items": [
+              {
+                "label": "Home",
+                "url": ""
+              },
+              {
+                "label": "About",
+                "url": ""
+              },
+              {
+                "label": "Coffee",
+                "url": ""
+              },
+              {
+                "label": "Contact",
+                "url": ""
+              }
+            ],
+            "ctaText": "Sign Up",
+            "logo": "Beans & Brews"
+          },
+          "locked": false,
+          "hidden": false,
+          "id": "5dbc98a4-c9c0-48b2-a29b-70c4f1d9b27a",
+          "zIndex": 21,
+          "pageId": "home"
+        },
+        "a5f75a85-2afb-44a9-87f4-18c5c42cf8ae": {
+          "type": "footer",
+          "bounds": {
+            "x": 0,
+            "y": 2041,
+            "width": 1301,
+            "height": 200
+          },
+          "props": {
+            "columns": [
+              {
+                "title": "Beans & Brews",
+                "links": [
+                  "About Us",
+                  "Careers"
+                ]
+              },
+              {
+                "title": "Support",
+                "links": [
+                  "Help Center",
+                  "Contact"
+                ]
+              },
+              {
+                "title": "Legal",
+                "links": [
+                  "Privacy",
+                  "Terms"
+                ]
+              }
+            ],
+            "copyright": "© 2026 Beans & Brews. All rights reserved."
+          },
+          "locked": false,
+          "hidden": false,
+          "id": "a5f75a85-2afb-44a9-87f4-18c5c42cf8ae",
+          "zIndex": 22,
+          "pageId": "home"
+        },
+        "521f5bfc-a6c9-460d-b6d8-d45996f82baa": {
+          "type": "button",
+          "bounds": {
+            "x": 543.2221984863281,
+            "y": 530.5069351196289,
+            "width": 65,
+            "height": 65
+          },
+          "props": {
+            "label": "➜",
+            "backgroundColor": "#2c1810",
+            "textColor": "#FFFFFF",
+            "borderRadius": 11
+          },
+          "locked": false,
+          "hidden": false,
+          "id": "521f5bfc-a6c9-460d-b6d8-d45996f82baa",
+          "zIndex": 23,
+          "pageId": "home"
+        }
+      },
+      "theme": {
+        "colors": {
+          "primary": "#C08B5C",
+          "secondary": "#2C1810",
+          "accent": "#D4A373",
+          "background": "#FAFAF5",
+          "text": "#2C1810"
+        },
+        "fonts": {
+          "heading": "Playfair Display",
+          "body": "Inter"
+        }
+      },
+      "id": "demo-site",
+      "lastSaved": "2026-02-13T15:48:01.898Z",
+      "lastPublished": "2026-02-13T15:48:01.922Z"
+    },
+    "beans-&-brew": {
+      "name": "My Site",
+      "pages": [
+        {
+          "id": "page-home",
+          "name": "Home",
+          "slug": "home",
+          "isHomePage": true,
+          "minHeight": 1200,
+          "height": 2000,
+          "sections": []
+        }
+      ],
+      "elements": {
+        "nav": {
+          "id": "nav",
+          "type": "navbar",
+          "pageId": "page-home",
+          "zIndex": 100,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 1200,
+            "height": 80
+          },
+          "props": {
+            "backgroundColor": "#fff7ed",
+            "textColor": "#431407"
+          }
+        },
+        "hero-sect": {
+          "id": "hero-sect",
+          "type": "section",
+          "pageId": "page-home",
+          "zIndex": 1,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 1200,
+            "height": 600
+          },
+          "props": {
+            "backgroundColor": "#fff7ed"
+          }
+        },
+        "hero-title": {
+          "id": "hero-title",
+          "type": "heading",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 100,
+            "y": 150,
+            "width": 1000,
+            "height": 120
+          },
+          "props": {
+            "content": "Bean & Brew",
+            "fontSize": 80,
+            "fontWeight": 900,
+            "color": "#9a3412",
+            "textAlign": "center",
+            "fontFamily": "Inter"
+          }
+        },
+        "hero-sub": {
+          "id": "hero-sub",
+          "type": "paragraph",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 200,
+            "y": 300,
+            "width": 800,
+            "height": 80
+          },
+          "props": {
+            "content": "Artisan Coffee, Roasted Locally.",
+            "fontSize": 24,
+            "color": "#431407",
+            "textAlign": "center"
+          }
+        },
+        "hero-desc-sub": {
+          "id": "hero-desc-sub",
+          "type": "paragraph",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 300,
+            "y": 380,
+            "width": 600,
+            "height": 60
+          },
+          "props": {
+            "content": "Experience the rich, bold flavors of ethically sourced beans, roasted right here in Seattle.",
+            "fontSize": 16,
+            "color": "#4b5563",
+            "textAlign": "center"
+          }
+        },
+        "about-sect": {
+          "id": "about-sect",
+          "type": "section",
+          "pageId": "page-home",
+          "zIndex": 1,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 600,
+            "width": 1200,
+            "height": 500
+          },
+          "props": {
+            "backgroundColor": "#ffedd5"
+          }
+        },
+        "about-img": {
+          "id": "about-img",
+          "type": "image",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 100,
+            "y": 650,
+            "width": 400,
+            "height": 400
+          },
+          "props": {
+            "src": "https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=1974&auto=format&fit=crop",
+            "alt": "About Us",
+            "objectFit": "cover"
+          }
+        },
+        "about-text": {
+          "id": "about-text",
+          "type": "paragraph",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 550,
+            "y": 700,
+            "width": 500,
+            "height": 300
+          },
+          "props": {
+            "content": "We are dedicated to providing the best service in the industry. Our journey began with a simple idea and has grown into a community of passionate individuals.",
+            "fontSize": 18,
+            "color": "#431407"
+          }
+        },
+        "test-sect": {
+          "id": "test-sect",
+          "type": "section",
+          "pageId": "page-home",
+          "zIndex": 1,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 1100,
+            "width": 1200,
+            "height": 400
+          },
+          "props": {
+            "backgroundColor": "#fff7ed"
+          }
+        },
+        "test-quote": {
+          "id": "test-quote",
+          "type": "text",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 200,
+            "y": 1180,
+            "width": 800,
+            "height": 120
+          },
+          "props": {
+            "content": "The best morning brew in the city. Absolutely love the atmosphere!\"",
+            "fontSize": 32,
+            "fontStyle": "italic",
+            "textAlign": "center",
+            "color": "#9a3412"
+          }
+        },
+        "test-author": {
+          "id": "test-author",
+          "type": "text",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 400,
+            "y": 1320,
+            "width": 400,
+            "height": 40
+          },
+          "props": {
+            "content": "- Sarah Jenkins",
+            "fontSize": 18,
+            "fontWeight": 700,
+            "textAlign": "center",
+            "color": "#431407"
+          }
+        }
+      },
+      "theme": {
+        "colors": {
+          "background": "#fff7ed",
+          "primary": "#9a3412",
+          "secondary": "#ffedd5",
+          "accent": "#fdba74",
+          "text": "#431407"
+        },
+        "fonts": {
+          "heading": "Inter",
+          "body": "Inter"
+        }
+      },
+      "id": "beans-&-brew",
+      "lastSaved": "2026-02-13T15:34:41.855Z",
+      "lastPublished": "2026-02-13T15:34:41.908Z"
+    },
+    "my-brand": {
+      "name": "My Site",
+      "pages": [
+        {
+          "id": "page-home",
+          "name": "Home",
+          "slug": "home",
+          "isHomePage": true,
+          "minHeight": 1200,
+          "height": 2000,
+          "sections": []
+        }
+      ],
+      "elements": {
+        "nav": {
+          "id": "nav",
+          "type": "navbar",
+          "pageId": "page-home",
+          "zIndex": 100,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 1200,
+            "height": 80
+          },
+          "props": {
+            "backgroundColor": "#ffffff",
+            "textColor": "#111827"
+          }
+        },
+        "hero-sect": {
+          "id": "hero-sect",
+          "type": "section",
+          "pageId": "page-home",
+          "zIndex": 1,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 1200,
+            "height": 600
+          },
+          "props": {
+            "backgroundColor": "#ffffff"
+          }
+        },
+        "hero-title": {
+          "id": "hero-title",
+          "type": "heading",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 100,
+            "y": 150,
+            "width": 1000,
+            "height": 120
+          },
+          "props": {
+            "content": "Bean & Brew",
+            "fontSize": 80,
+            "fontWeight": 900,
+            "color": "#111827",
+            "textAlign": "center",
+            "fontFamily": "Inter"
+          }
+        },
+        "hero-sub": {
+          "id": "hero-sub",
+          "type": "paragraph",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 200,
+            "y": 300,
+            "width": 800,
+            "height": 80
+          },
+          "props": {
+            "content": "Artisan Coffee, Roasted Locally.",
+            "fontSize": 24,
+            "color": "#111827",
+            "textAlign": "center"
+          }
+        },
+        "hero-desc-sub": {
+          "id": "hero-desc-sub",
+          "type": "paragraph",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 300,
+            "y": 380,
+            "width": 600,
+            "height": 60
+          },
+          "props": {
+            "content": "Experience the rich, bold flavors of ethically sourced beans, roasted right here in Seattle.",
+            "fontSize": 16,
+            "color": "#4b5563",
+            "textAlign": "center"
+          }
+        },
+        "about-sect": {
+          "id": "about-sect",
+          "type": "section",
+          "pageId": "page-home",
+          "zIndex": 1,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 600,
+            "width": 1200,
+            "height": 500
+          },
+          "props": {
+            "backgroundColor": "#f3f4f6"
+          }
+        },
+        "about-img": {
+          "id": "about-img",
+          "type": "image",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 100,
+            "y": 650,
+            "width": 400,
+            "height": 400
+          },
+          "props": {
+            "src": "https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=1974&auto=format&fit=crop",
+            "alt": "About Us",
+            "objectFit": "cover"
+          }
+        },
+        "about-text": {
+          "id": "about-text",
+          "type": "paragraph",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 550,
+            "y": 700,
+            "width": 500,
+            "height": 300
+          },
+          "props": {
+            "content": "We are dedicated to providing the best service in the industry. Our journey began with a simple idea and has grown into a community of passionate individuals.",
+            "fontSize": 18,
+            "color": "#111827"
+          }
+        },
+        "test-sect": {
+          "id": "test-sect",
+          "type": "section",
+          "pageId": "page-home",
+          "zIndex": 1,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 1100,
+            "width": 1200,
+            "height": 400
+          },
+          "props": {
+            "backgroundColor": "#ffffff"
+          }
+        },
+        "test-quote": {
+          "id": "test-quote",
+          "type": "text",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 200,
+            "y": 1180,
+            "width": 800,
+            "height": 120
+          },
+          "props": {
+            "content": "The best morning brew in the city. Absolutely love the atmosphere!\"",
+            "fontSize": 32,
+            "fontStyle": "italic",
+            "textAlign": "center",
+            "color": "#111827"
+          }
+        },
+        "test-author": {
+          "id": "test-author",
+          "type": "text",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 400,
+            "y": 1320,
+            "width": 400,
+            "height": 40
+          },
+          "props": {
+            "content": "- Sarah Jenkins",
+            "fontSize": 18,
+            "fontWeight": 700,
+            "textAlign": "center",
+            "color": "#111827"
+          }
+        }
+      },
+      "theme": {
+        "colors": {
+          "background": "#ffffff",
+          "primary": "#111827",
+          "secondary": "#f3f4f6",
+          "accent": "#000000",
+          "text": "#111827"
+        },
+        "fonts": {
+          "heading": "Inter",
+          "body": "Inter"
+        }
+      },
+      "id": "my-brand",
+      "lastSaved": "2026-02-13T12:49:54.680Z",
+      "lastPublished": "2026-02-13T12:49:54.743Z"
+    },
+    "beans-and-brew": {
+      "name": "My Site",
+      "pages": [
+        {
+          "id": "page-home",
+          "name": "Home",
+          "slug": "home",
+          "isHomePage": true,
+          "minHeight": 1200,
+          "height": 2000,
+          "sections": []
+        }
+      ],
+      "elements": {
+        "nav": {
+          "id": "nav",
+          "type": "navbar",
+          "pageId": "page-home",
+          "zIndex": 100,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 1200,
+            "height": 80
+          },
+          "props": {
+            "backgroundColor": "#1c1917",
+            "textColor": "#fafaf9"
+          }
+        },
+        "hero-sect": {
+          "id": "hero-sect",
+          "type": "section",
+          "pageId": "page-home",
+          "zIndex": 1,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 1200,
+            "height": 600
+          },
+          "props": {
+            "backgroundColor": "#1c1917"
+          }
+        },
+        "hero-title": {
+          "id": "hero-title",
+          "type": "heading",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 100,
+            "y": 150,
+            "width": 1000,
+            "height": 120
+          },
+          "props": {
+            "content": "Bean & Brew",
+            "fontSize": 80,
+            "fontWeight": 900,
+            "color": "#dec79b",
+            "textAlign": "center",
+            "fontFamily": "Playfair Display"
+          }
+        },
+        "hero-sub": {
+          "id": "hero-sub",
+          "type": "paragraph",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 200,
+            "y": 300,
+            "width": 800,
+            "height": 80
+          },
+          "props": {
+            "content": "Artisan Coffee, Roasted Locally.",
+            "fontSize": 24,
+            "color": "#fafaf9",
+            "textAlign": "center"
+          }
+        },
+        "hero-desc-sub": {
+          "id": "hero-desc-sub",
+          "type": "paragraph",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 300,
+            "y": 380,
+            "width": 600,
+            "height": 60
+          },
+          "props": {
+            "content": "Experience the rich, bold flavors of ethically sourced beans, roasted right here in Seattle.",
+            "fontSize": 16,
+            "color": "#4b5563",
+            "textAlign": "center"
+          }
+        },
+        "about-sect": {
+          "id": "about-sect",
+          "type": "section",
+          "pageId": "page-home",
+          "zIndex": 1,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 600,
+            "width": 1200,
+            "height": 500
+          },
+          "props": {
+            "backgroundColor": "#292524"
+          }
+        },
+        "about-img": {
+          "id": "about-img",
+          "type": "image",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 100,
+            "y": 650,
+            "width": 400,
+            "height": 400
+          },
+          "props": {
+            "src": "https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=1974&auto=format&fit=crop",
+            "alt": "About Us",
+            "objectFit": "cover"
+          }
+        },
+        "about-text": {
+          "id": "about-text",
+          "type": "paragraph",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 550,
+            "y": 700,
+            "width": 500,
+            "height": 300
+          },
+          "props": {
+            "content": "We are dedicated to providing the best service in the industry. Our journey began with a simple idea and has grown into a community of passionate individuals.",
+            "fontSize": 18,
+            "color": "#fafaf9"
+          }
+        },
+        "test-sect": {
+          "id": "test-sect",
+          "type": "section",
+          "pageId": "page-home",
+          "zIndex": 1,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 1100,
+            "width": 1200,
+            "height": 400
+          },
+          "props": {
+            "backgroundColor": "#1c1917"
+          }
+        },
+        "test-quote": {
+          "id": "test-quote",
+          "type": "text",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 200,
+            "y": 1180,
+            "width": 800,
+            "height": 120
+          },
+          "props": {
+            "content": "The best morning brew in the city. Absolutely love the atmosphere!\"",
+            "fontSize": 32,
+            "fontStyle": "italic",
+            "textAlign": "center",
+            "color": "#dec79b"
+          }
+        },
+        "test-author": {
+          "id": "test-author",
+          "type": "text",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 400,
+            "y": 1320,
+            "width": 400,
+            "height": 40
+          },
+          "props": {
+            "content": "- Sarah Jenkins",
+            "fontSize": 18,
+            "fontWeight": 700,
+            "textAlign": "center",
+            "color": "#fafaf9"
+          }
+        }
+      },
+      "theme": {
+        "colors": {
+          "background": "#1c1917",
+          "primary": "#dec79b",
+          "secondary": "#292524",
+          "accent": "#dec79b",
+          "text": "#fafaf9"
+        },
+        "fonts": {
+          "heading": "Playfair Display",
+          "body": "Inter"
+        }
+      },
+      "id": "beans-and-brew",
+      "lastSaved": "2026-02-13T14:32:29.394Z",
+      "lastPublished": "2026-02-13T14:32:29.418Z"
+    },
+    "i-would-like-to-call-my-business": {
+      "name": "My Site",
+      "pages": [
+        {
+          "id": "page-home",
+          "name": "Home",
+          "slug": "home",
+          "isHomePage": true,
+          "minHeight": 1200,
+          "height": 2000,
+          "sections": []
+        }
+      ],
+      "elements": {
+        "nav": {
+          "id": "nav",
+          "type": "navbar",
+          "pageId": "page-home",
+          "zIndex": 100,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 1200,
+            "height": 80
+          },
+          "props": {
+            "backgroundColor": "#1c1917",
+            "textColor": "#fafaf9"
+          }
+        },
+        "hero-sect": {
+          "id": "hero-sect",
+          "type": "section",
+          "pageId": "page-home",
+          "zIndex": 1,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 1200,
+            "height": 600
+          },
+          "props": {
+            "backgroundColor": "#1c1917"
+          }
+        },
+        "hero-title": {
+          "id": "hero-title",
+          "type": "heading",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 100,
+            "y": 150,
+            "width": 1000,
+            "height": 120
+          },
+          "props": {
+            "content": "Bean & Brew",
+            "fontSize": 80,
+            "fontWeight": 900,
+            "color": "#dec79b",
+            "textAlign": "center",
+            "fontFamily": "Playfair Display"
+          }
+        },
+        "hero-sub": {
+          "id": "hero-sub",
+          "type": "paragraph",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 200,
+            "y": 300,
+            "width": 800,
+            "height": 80
+          },
+          "props": {
+            "content": "Artisan Coffee, Roasted Locally.",
+            "fontSize": 24,
+            "color": "#fafaf9",
+            "textAlign": "center"
+          }
+        },
+        "hero-desc-sub": {
+          "id": "hero-desc-sub",
+          "type": "paragraph",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 300,
+            "y": 380,
+            "width": 600,
+            "height": 60
+          },
+          "props": {
+            "content": "Experience the rich, bold flavors of ethically sourced beans, roasted right here in Seattle.",
+            "fontSize": 16,
+            "color": "#4b5563",
+            "textAlign": "center"
+          }
+        },
+        "about-sect": {
+          "id": "about-sect",
+          "type": "section",
+          "pageId": "page-home",
+          "zIndex": 1,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 600,
+            "width": 1200,
+            "height": 500
+          },
+          "props": {
+            "backgroundColor": "#292524"
+          }
+        },
+        "about-img": {
+          "id": "about-img",
+          "type": "image",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 100,
+            "y": 650,
+            "width": 400,
+            "height": 400
+          },
+          "props": {
+            "src": "https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=1974&auto=format&fit=crop",
+            "alt": "About Us",
+            "objectFit": "cover"
+          }
+        },
+        "about-text": {
+          "id": "about-text",
+          "type": "paragraph",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 550,
+            "y": 700,
+            "width": 500,
+            "height": 300
+          },
+          "props": {
+            "content": "We are dedicated to providing the best service in the industry. Our journey began with a simple idea and has grown into a community of passionate individuals.",
+            "fontSize": 18,
+            "color": "#fafaf9"
+          }
+        },
+        "test-sect": {
+          "id": "test-sect",
+          "type": "section",
+          "pageId": "page-home",
+          "zIndex": 1,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 1100,
+            "width": 1200,
+            "height": 400
+          },
+          "props": {
+            "backgroundColor": "#1c1917"
+          }
+        },
+        "test-quote": {
+          "id": "test-quote",
+          "type": "text",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 200,
+            "y": 1180,
+            "width": 800,
+            "height": 120
+          },
+          "props": {
+            "content": "The best morning brew in the city. Absolutely love the atmosphere!\"",
+            "fontSize": 32,
+            "fontStyle": "italic",
+            "textAlign": "center",
+            "color": "#dec79b"
+          }
+        },
+        "test-author": {
+          "id": "test-author",
+          "type": "text",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 400,
+            "y": 1320,
+            "width": 400,
+            "height": 40
+          },
+          "props": {
+            "content": "- Sarah Jenkins",
+            "fontSize": 18,
+            "fontWeight": 700,
+            "textAlign": "center",
+            "color": "#fafaf9"
+          }
+        }
+      },
+      "theme": {
+        "colors": {
+          "background": "#1c1917",
+          "primary": "#dec79b",
+          "secondary": "#292524",
+          "accent": "#dec79b",
+          "text": "#fafaf9"
+        },
+        "fonts": {
+          "heading": "Playfair Display",
+          "body": "Inter"
+        }
+      },
+      "id": "i-would-like-to-call-my-business",
+      "lastSaved": "2026-02-13T15:38:39.977Z",
+      "lastPublished": "2026-02-13T15:38:39.987Z"
+    }
+  },
+  "published": {
+    "demo-site": {
+      "id": "demo-site",
+      "publishedAt": "2026-02-13T15:48:01.922Z",
+      "pages": [
+        {
+          "id": "home",
+          "name": "Home",
+          "slug": "/",
+          "isHomePage": true,
+          "sections": [
+            {
+              "id": "hero-section",
+              "name": "Hero",
+              "height": 850,
+              "backgroundColor": "#FAFAF5",
+              "elements": [
+                "hero-title",
+                "hero-sub",
+                "hero-btn-primary",
+                "hero-btn-secondary",
+                "hero-image"
+              ]
+            },
+            {
+              "id": "story-section",
+              "name": "Our Story",
+              "height": 600,
+              "backgroundColor": "#FFFFFF",
+              "elements": [
+                "story-image",
+                "story-title",
+                "story-text"
+              ]
+            },
+            {
+              "id": "testimonial-section",
+              "name": "Testimonials",
+              "height": 500,
+              "backgroundColor": "#2C1810",
+              "elements": [
+                "testimonial-quote",
+                "testimonial-text",
+                "testimonial-author"
+              ]
+            }
+          ],
+          "minHeight": 1950,
+          "height": 2239
+        },
+        {
+          "id": "menu",
+          "name": "Menu",
+          "slug": "/menu",
+          "isHomePage": false,
+          "sections": [
+            {
+              "id": "menu-hero",
+              "name": "Menu Header",
+              "height": 400,
+              "backgroundColor": "#FAFAF5",
+              "elements": []
+            }
+          ],
+          "minHeight": 600,
+          "height": 800
+        }
+      ],
+      "elements": {
+        "hero-title": {
+          "id": "hero-title",
+          "type": "heading",
+          "pageId": "home",
+          "bounds": {
+            "x": 76,
+            "y": 182,
+            "width": 600,
+            "height": 203
+          },
+          "zIndex": 20,
+          "props": {
+            "content": "Artisan Coffee,\nRoasted Locally.",
+            "fontSize": 96,
+            "fontFamily": "Playfair Display",
+            "fontWeight": 800,
+            "color": "#2C1810",
+            "textAlign": "left",
+            "lineHeight": 1.05,
+            "letterSpacing": -2
+          },
+          "locked": false,
+          "hidden": false
+        },
+        "hero-sub": {
+          "id": "hero-sub",
+          "type": "paragraph",
+          "pageId": "home",
+          "bounds": {
+            "x": 85,
+            "y": 400,
+            "width": 480,
+            "height": 100
+          },
+          "zIndex": 20,
+          "props": {
+            "content": "Experience the rich, bold flavors of ethically sourced beans, roasted small-batch right here in Seattle. Every cup is crafted with passion and precision.",
+            "fontSize": 20,
+            "fontFamily": "Inter",
+            "fontWeight": 400,
+            "color": "#5D4037",
+            "textAlign": "left",
+            "lineHeight": 1.6
+          },
+          "locked": false,
+          "hidden": false
+        },
+        "hero-btn-primary": {
+          "id": "hero-btn-primary",
+          "type": "button",
+          "pageId": "home",
+          "bounds": {
+            "x": 80,
+            "y": 530,
+            "width": 220,
+            "height": 64
+          },
+          "zIndex": 20,
+          "props": {
+            "label": "Order Online",
+            "backgroundColor": "#2C1810",
+            "textColor": "#FFFFFF",
+            "borderRadius": 0,
+            "borderWidth": 0,
+            "borderColor": "transparent",
+            "fontSize": 18,
+            "fontWeight": 600,
+            "letterSpacing": 1
+          },
+          "locked": false,
+          "hidden": false
+        },
+        "hero-btn-secondary": {
+          "id": "hero-btn-secondary",
+          "type": "button",
+          "pageId": "home",
+          "bounds": {
+            "x": 330,
+            "y": 530,
+            "width": 200,
+            "height": 64
+          },
+          "zIndex": 20,
+          "props": {
+            "label": "View Menu",
+            "backgroundColor": "transparent",
+            "textColor": "#2C1810",
+            "borderRadius": 0,
+            "borderWidth": 2,
+            "borderColor": "#2C1810",
+            "fontSize": 18,
+            "fontWeight": 600,
+            "letterSpacing": 1
+          },
+          "locked": false,
+          "hidden": false
+        },
+        "hero-image": {
+          "id": "hero-image",
+          "type": "image",
+          "pageId": "home",
+          "bounds": {
+            "x": 630,
+            "y": 78,
+            "width": 650,
+            "height": 750
+          },
+          "zIndex": 10,
+          "props": {
+            "src": "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=2071&auto=format&fit=crop",
+            "alt": "Pour Over Coffee",
+            "objectFit": "cover",
+            "borderRadius": 0
+          },
+          "locked": false,
+          "hidden": false
+        },
+        "story-image": {
+          "id": "story-image",
+          "type": "image",
+          "pageId": "home",
+          "bounds": {
+            "x": 0,
+            "y": 850,
+            "width": 700,
+            "height": 600
+          },
+          "zIndex": 5,
+          "props": {
+            "src": "https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=1974&auto=format&fit=crop",
+            "alt": "Our Cafe Interior",
+            "objectFit": "cover",
+            "borderRadius": 0
+          },
+          "locked": false,
+          "hidden": false
+        },
+        "story-title": {
+          "id": "story-title",
+          "type": "heading",
+          "pageId": "home",
+          "bounds": {
+            "x": 748,
+            "y": 950,
+            "width": 500,
+            "height": 80
+          },
+          "zIndex": 10,
+          "props": {
+            "content": "Our Story",
+            "fontSize": 56,
+            "fontFamily": "Playfair Display",
+            "fontWeight": 700,
+            "color": "#2C1810",
+            "textAlign": "left"
+          },
+          "locked": false,
+          "hidden": false
+        },
+        "story-text": {
+          "id": "story-text",
+          "type": "paragraph",
+          "pageId": "home",
+          "bounds": {
+            "x": 746,
+            "y": 1050,
+            "width": 500,
+            "height": 300
+          },
+          "zIndex": 10,
+          "props": {
+            "content": "Founded in 2018, Bean & Brew began with a simple mission: to serve the perfect cup. We source our beans directly from sustainable farms in Ethiopia and Colombia, roasting them in-house to unlock their full potential.\n\nOur flagship store in downtown Seattle is designed to be your sanctuary—a place to pause, sip, and savor.",
+            "fontSize": 18,
+            "fontFamily": "Inter",
+            "fontWeight": 400,
+            "color": "#4B5563",
+            "textAlign": "left",
+            "lineHeight": 1.8
+          },
+          "locked": false,
+          "hidden": false
+        },
+        "testimonial-quote": {
+          "id": "testimonial-quote",
+          "type": "text",
+          "pageId": "home",
+          "bounds": {
+            "x": 600,
+            "y": 1550,
+            "width": 100,
+            "height": 100
+          },
+          "zIndex": 10,
+          "props": {
+            "content": "“",
+            "fontSize": 120,
+            "fontFamily": "Playfair Display",
+            "fontWeight": 400,
+            "color": "#D4A373",
+            "textAlign": "center",
+            "lineHeight": 1
+          },
+          "locked": false,
+          "hidden": false
+        },
+        "testimonial-text": {
+          "id": "testimonial-text",
+          "type": "paragraph",
+          "pageId": "home",
+          "bounds": {
+            "x": 300,
+            "y": 1680,
+            "width": 700,
+            "height": 150
+          },
+          "zIndex": 10,
+          "props": {
+            "content": "The best morning brew in the city. Absolutely love the atmosphere! The baristas know exactly how to pull the perfect shot.",
+            "fontSize": 32,
+            "fontFamily": "Playfair Display",
+            "fontWeight": 500,
+            "color": "#FFFFFF",
+            "textAlign": "center",
+            "lineHeight": 1.5
+          },
+          "locked": false,
+          "hidden": false
+        },
+        "testimonial-author": {
+          "id": "testimonial-author",
+          "type": "text",
+          "pageId": "home",
+          "bounds": {
+            "x": 450,
+            "y": 1850,
+            "width": 400,
+            "height": 40
+          },
+          "zIndex": 10,
+          "props": {
+            "content": "SARAH JENKINS — LOCAL GUIDE",
+            "fontSize": 14,
+            "fontFamily": "Inter",
+            "fontWeight": 700,
+            "letterSpacing": 2,
+            "color": "#D4A373",
+            "textAlign": "center"
+          },
+          "locked": false,
+          "hidden": false
+        },
+        "4733601a-b0e6-41ec-89e3-d5c43a7c0b1c": {
+          "type": "box",
+          "bounds": {
+            "x": 165.22219848632812,
+            "y": 1548.1736450195312,
+            "width": 963,
+            "height": 400
+          },
+          "props": {
+            "backgroundColor": "#5a1a07",
+            "borderRadius": 20,
+            "shadow": "lg",
+            "backdropBlur": true
+          },
+          "locked": false,
+          "hidden": false,
+          "id": "4733601a-b0e6-41ec-89e3-d5c43a7c0b1c",
+          "zIndex": 3,
+          "pageId": "home"
+        },
+        "5dbc98a4-c9c0-48b2-a29b-70c4f1d9b27a": {
+          "type": "navbar",
+          "bounds": {
+            "x": 0,
+            "y": 3,
+            "width": 1279,
+            "height": 54
+          },
+          "props": {
+            "style": "horizontal",
+            "items": [
+              {
+                "label": "Home",
+                "url": ""
+              },
+              {
+                "label": "About",
+                "url": ""
+              },
+              {
+                "label": "Coffee",
+                "url": ""
+              },
+              {
+                "label": "Contact",
+                "url": ""
+              }
+            ],
+            "ctaText": "Sign Up",
+            "logo": "Beans & Brews"
+          },
+          "locked": false,
+          "hidden": false,
+          "id": "5dbc98a4-c9c0-48b2-a29b-70c4f1d9b27a",
+          "zIndex": 21,
+          "pageId": "home"
+        },
+        "a5f75a85-2afb-44a9-87f4-18c5c42cf8ae": {
+          "type": "footer",
+          "bounds": {
+            "x": 0,
+            "y": 2041,
+            "width": 1301,
+            "height": 200
+          },
+          "props": {
+            "columns": [
+              {
+                "title": "Beans & Brews",
+                "links": [
+                  "About Us",
+                  "Careers"
+                ]
+              },
+              {
+                "title": "Support",
+                "links": [
+                  "Help Center",
+                  "Contact"
+                ]
+              },
+              {
+                "title": "Legal",
+                "links": [
+                  "Privacy",
+                  "Terms"
+                ]
+              }
+            ],
+            "copyright": "© 2026 Beans & Brews. All rights reserved."
+          },
+          "locked": false,
+          "hidden": false,
+          "id": "a5f75a85-2afb-44a9-87f4-18c5c42cf8ae",
+          "zIndex": 22,
+          "pageId": "home"
+        },
+        "521f5bfc-a6c9-460d-b6d8-d45996f82baa": {
+          "type": "button",
+          "bounds": {
+            "x": 543.2221984863281,
+            "y": 530.5069351196289,
+            "width": 65,
+            "height": 65
+          },
+          "props": {
+            "label": "➜",
+            "backgroundColor": "#2c1810",
+            "textColor": "#FFFFFF",
+            "borderRadius": 11
+          },
+          "locked": false,
+          "hidden": false,
+          "id": "521f5bfc-a6c9-460d-b6d8-d45996f82baa",
+          "zIndex": 23,
+          "pageId": "home"
+        }
+      },
+      "theme": {
+        "colors": {
+          "primary": "#C08B5C",
+          "secondary": "#2C1810",
+          "accent": "#D4A373",
+          "background": "#FAFAF5",
+          "text": "#2C1810"
+        },
+        "fonts": {
+          "heading": "Playfair Display",
+          "body": "Inter"
+        }
+      }
+    },
+    "beans-&-brew": {
+      "id": "beans-&-brew",
+      "publishedAt": "2026-02-13T15:34:41.908Z",
+      "pages": [
+        {
+          "id": "page-home",
+          "name": "Home",
+          "slug": "home",
+          "isHomePage": true,
+          "minHeight": 1200,
+          "height": 2000,
+          "sections": []
+        }
+      ],
+      "elements": {
+        "nav": {
+          "id": "nav",
+          "type": "navbar",
+          "pageId": "page-home",
+          "zIndex": 100,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 1200,
+            "height": 80
+          },
+          "props": {
+            "backgroundColor": "#fff7ed",
+            "textColor": "#431407"
+          }
+        },
+        "hero-sect": {
+          "id": "hero-sect",
+          "type": "section",
+          "pageId": "page-home",
+          "zIndex": 1,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 1200,
+            "height": 600
+          },
+          "props": {
+            "backgroundColor": "#fff7ed"
+          }
+        },
+        "hero-title": {
+          "id": "hero-title",
+          "type": "heading",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 100,
+            "y": 150,
+            "width": 1000,
+            "height": 120
+          },
+          "props": {
+            "content": "Bean & Brew",
+            "fontSize": 80,
+            "fontWeight": 900,
+            "color": "#9a3412",
+            "textAlign": "center",
+            "fontFamily": "Inter"
+          }
+        },
+        "hero-sub": {
+          "id": "hero-sub",
+          "type": "paragraph",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 200,
+            "y": 300,
+            "width": 800,
+            "height": 80
+          },
+          "props": {
+            "content": "Artisan Coffee, Roasted Locally.",
+            "fontSize": 24,
+            "color": "#431407",
+            "textAlign": "center"
+          }
+        },
+        "hero-desc-sub": {
+          "id": "hero-desc-sub",
+          "type": "paragraph",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 300,
+            "y": 380,
+            "width": 600,
+            "height": 60
+          },
+          "props": {
+            "content": "Experience the rich, bold flavors of ethically sourced beans, roasted right here in Seattle.",
+            "fontSize": 16,
+            "color": "#4b5563",
+            "textAlign": "center"
+          }
+        },
+        "about-sect": {
+          "id": "about-sect",
+          "type": "section",
+          "pageId": "page-home",
+          "zIndex": 1,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 600,
+            "width": 1200,
+            "height": 500
+          },
+          "props": {
+            "backgroundColor": "#ffedd5"
+          }
+        },
+        "about-img": {
+          "id": "about-img",
+          "type": "image",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 100,
+            "y": 650,
+            "width": 400,
+            "height": 400
+          },
+          "props": {
+            "src": "https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=1974&auto=format&fit=crop",
+            "alt": "About Us",
+            "objectFit": "cover"
+          }
+        },
+        "about-text": {
+          "id": "about-text",
+          "type": "paragraph",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 550,
+            "y": 700,
+            "width": 500,
+            "height": 300
+          },
+          "props": {
+            "content": "We are dedicated to providing the best service in the industry. Our journey began with a simple idea and has grown into a community of passionate individuals.",
+            "fontSize": 18,
+            "color": "#431407"
+          }
+        },
+        "test-sect": {
+          "id": "test-sect",
+          "type": "section",
+          "pageId": "page-home",
+          "zIndex": 1,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 1100,
+            "width": 1200,
+            "height": 400
+          },
+          "props": {
+            "backgroundColor": "#fff7ed"
+          }
+        },
+        "test-quote": {
+          "id": "test-quote",
+          "type": "text",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 200,
+            "y": 1180,
+            "width": 800,
+            "height": 120
+          },
+          "props": {
+            "content": "The best morning brew in the city. Absolutely love the atmosphere!\"",
+            "fontSize": 32,
+            "fontStyle": "italic",
+            "textAlign": "center",
+            "color": "#9a3412"
+          }
+        },
+        "test-author": {
+          "id": "test-author",
+          "type": "text",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 400,
+            "y": 1320,
+            "width": 400,
+            "height": 40
+          },
+          "props": {
+            "content": "- Sarah Jenkins",
+            "fontSize": 18,
+            "fontWeight": 700,
+            "textAlign": "center",
+            "color": "#431407"
+          }
+        }
+      },
+      "theme": {
+        "colors": {
+          "background": "#fff7ed",
+          "primary": "#9a3412",
+          "secondary": "#ffedd5",
+          "accent": "#fdba74",
+          "text": "#431407"
+        },
+        "fonts": {
+          "heading": "Inter",
+          "body": "Inter"
+        }
+      }
+    },
+    "my-brand": {
+      "id": "my-brand",
+      "publishedAt": "2026-02-13T12:49:54.743Z",
+      "pages": [
+        {
+          "id": "page-home",
+          "name": "Home",
+          "slug": "home",
+          "isHomePage": true,
+          "minHeight": 1200,
+          "height": 2000,
+          "sections": []
+        }
+      ],
+      "elements": {
+        "nav": {
+          "id": "nav",
+          "type": "navbar",
+          "pageId": "page-home",
+          "zIndex": 100,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 1200,
+            "height": 80
+          },
+          "props": {
+            "backgroundColor": "#ffffff",
+            "textColor": "#111827"
+          }
+        },
+        "hero-sect": {
+          "id": "hero-sect",
+          "type": "section",
+          "pageId": "page-home",
+          "zIndex": 1,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 1200,
+            "height": 600
+          },
+          "props": {
+            "backgroundColor": "#ffffff"
+          }
+        },
+        "hero-title": {
+          "id": "hero-title",
+          "type": "heading",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 100,
+            "y": 150,
+            "width": 1000,
+            "height": 120
+          },
+          "props": {
+            "content": "Bean & Brew",
+            "fontSize": 80,
+            "fontWeight": 900,
+            "color": "#111827",
+            "textAlign": "center",
+            "fontFamily": "Inter"
+          }
+        },
+        "hero-sub": {
+          "id": "hero-sub",
+          "type": "paragraph",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 200,
+            "y": 300,
+            "width": 800,
+            "height": 80
+          },
+          "props": {
+            "content": "Artisan Coffee, Roasted Locally.",
+            "fontSize": 24,
+            "color": "#111827",
+            "textAlign": "center"
+          }
+        },
+        "hero-desc-sub": {
+          "id": "hero-desc-sub",
+          "type": "paragraph",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 300,
+            "y": 380,
+            "width": 600,
+            "height": 60
+          },
+          "props": {
+            "content": "Experience the rich, bold flavors of ethically sourced beans, roasted right here in Seattle.",
+            "fontSize": 16,
+            "color": "#4b5563",
+            "textAlign": "center"
+          }
+        },
+        "about-sect": {
+          "id": "about-sect",
+          "type": "section",
+          "pageId": "page-home",
+          "zIndex": 1,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 600,
+            "width": 1200,
+            "height": 500
+          },
+          "props": {
+            "backgroundColor": "#f3f4f6"
+          }
+        },
+        "about-img": {
+          "id": "about-img",
+          "type": "image",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 100,
+            "y": 650,
+            "width": 400,
+            "height": 400
+          },
+          "props": {
+            "src": "https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=1974&auto=format&fit=crop",
+            "alt": "About Us",
+            "objectFit": "cover"
+          }
+        },
+        "about-text": {
+          "id": "about-text",
+          "type": "paragraph",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 550,
+            "y": 700,
+            "width": 500,
+            "height": 300
+          },
+          "props": {
+            "content": "We are dedicated to providing the best service in the industry. Our journey began with a simple idea and has grown into a community of passionate individuals.",
+            "fontSize": 18,
+            "color": "#111827"
+          }
+        },
+        "test-sect": {
+          "id": "test-sect",
+          "type": "section",
+          "pageId": "page-home",
+          "zIndex": 1,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 1100,
+            "width": 1200,
+            "height": 400
+          },
+          "props": {
+            "backgroundColor": "#ffffff"
+          }
+        },
+        "test-quote": {
+          "id": "test-quote",
+          "type": "text",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 200,
+            "y": 1180,
+            "width": 800,
+            "height": 120
+          },
+          "props": {
+            "content": "The best morning brew in the city. Absolutely love the atmosphere!\"",
+            "fontSize": 32,
+            "fontStyle": "italic",
+            "textAlign": "center",
+            "color": "#111827"
+          }
+        },
+        "test-author": {
+          "id": "test-author",
+          "type": "text",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 400,
+            "y": 1320,
+            "width": 400,
+            "height": 40
+          },
+          "props": {
+            "content": "- Sarah Jenkins",
+            "fontSize": 18,
+            "fontWeight": 700,
+            "textAlign": "center",
+            "color": "#111827"
+          }
+        }
+      },
+      "theme": {
+        "colors": {
+          "background": "#ffffff",
+          "primary": "#111827",
+          "secondary": "#f3f4f6",
+          "accent": "#000000",
+          "text": "#111827"
+        },
+        "fonts": {
+          "heading": "Inter",
+          "body": "Inter"
+        }
+      }
+    },
+    "beans-and-brew": {
+      "id": "beans-and-brew",
+      "publishedAt": "2026-02-13T14:32:29.418Z",
+      "pages": [
+        {
+          "id": "page-home",
+          "name": "Home",
+          "slug": "home",
+          "isHomePage": true,
+          "minHeight": 1200,
+          "height": 2000,
+          "sections": []
+        }
+      ],
+      "elements": {
+        "nav": {
+          "id": "nav",
+          "type": "navbar",
+          "pageId": "page-home",
+          "zIndex": 100,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 1200,
+            "height": 80
+          },
+          "props": {
+            "backgroundColor": "#1c1917",
+            "textColor": "#fafaf9"
+          }
+        },
+        "hero-sect": {
+          "id": "hero-sect",
+          "type": "section",
+          "pageId": "page-home",
+          "zIndex": 1,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 1200,
+            "height": 600
+          },
+          "props": {
+            "backgroundColor": "#1c1917"
+          }
+        },
+        "hero-title": {
+          "id": "hero-title",
+          "type": "heading",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 100,
+            "y": 150,
+            "width": 1000,
+            "height": 120
+          },
+          "props": {
+            "content": "Bean & Brew",
+            "fontSize": 80,
+            "fontWeight": 900,
+            "color": "#dec79b",
+            "textAlign": "center",
+            "fontFamily": "Playfair Display"
+          }
+        },
+        "hero-sub": {
+          "id": "hero-sub",
+          "type": "paragraph",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 200,
+            "y": 300,
+            "width": 800,
+            "height": 80
+          },
+          "props": {
+            "content": "Artisan Coffee, Roasted Locally.",
+            "fontSize": 24,
+            "color": "#fafaf9",
+            "textAlign": "center"
+          }
+        },
+        "hero-desc-sub": {
+          "id": "hero-desc-sub",
+          "type": "paragraph",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 300,
+            "y": 380,
+            "width": 600,
+            "height": 60
+          },
+          "props": {
+            "content": "Experience the rich, bold flavors of ethically sourced beans, roasted right here in Seattle.",
+            "fontSize": 16,
+            "color": "#4b5563",
+            "textAlign": "center"
+          }
+        },
+        "about-sect": {
+          "id": "about-sect",
+          "type": "section",
+          "pageId": "page-home",
+          "zIndex": 1,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 600,
+            "width": 1200,
+            "height": 500
+          },
+          "props": {
+            "backgroundColor": "#292524"
+          }
+        },
+        "about-img": {
+          "id": "about-img",
+          "type": "image",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 100,
+            "y": 650,
+            "width": 400,
+            "height": 400
+          },
+          "props": {
+            "src": "https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=1974&auto=format&fit=crop",
+            "alt": "About Us",
+            "objectFit": "cover"
+          }
+        },
+        "about-text": {
+          "id": "about-text",
+          "type": "paragraph",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 550,
+            "y": 700,
+            "width": 500,
+            "height": 300
+          },
+          "props": {
+            "content": "We are dedicated to providing the best service in the industry. Our journey began with a simple idea and has grown into a community of passionate individuals.",
+            "fontSize": 18,
+            "color": "#fafaf9"
+          }
+        },
+        "test-sect": {
+          "id": "test-sect",
+          "type": "section",
+          "pageId": "page-home",
+          "zIndex": 1,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 1100,
+            "width": 1200,
+            "height": 400
+          },
+          "props": {
+            "backgroundColor": "#1c1917"
+          }
+        },
+        "test-quote": {
+          "id": "test-quote",
+          "type": "text",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 200,
+            "y": 1180,
+            "width": 800,
+            "height": 120
+          },
+          "props": {
+            "content": "The best morning brew in the city. Absolutely love the atmosphere!\"",
+            "fontSize": 32,
+            "fontStyle": "italic",
+            "textAlign": "center",
+            "color": "#dec79b"
+          }
+        },
+        "test-author": {
+          "id": "test-author",
+          "type": "text",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 400,
+            "y": 1320,
+            "width": 400,
+            "height": 40
+          },
+          "props": {
+            "content": "- Sarah Jenkins",
+            "fontSize": 18,
+            "fontWeight": 700,
+            "textAlign": "center",
+            "color": "#fafaf9"
+          }
+        }
+      },
+      "theme": {
+        "colors": {
+          "background": "#1c1917",
+          "primary": "#dec79b",
+          "secondary": "#292524",
+          "accent": "#dec79b",
+          "text": "#fafaf9"
+        },
+        "fonts": {
+          "heading": "Playfair Display",
+          "body": "Inter"
+        }
+      }
+    },
+    "i-would-like-to-call-my-business": {
+      "id": "i-would-like-to-call-my-business",
+      "publishedAt": "2026-02-13T15:38:39.987Z",
+      "pages": [
+        {
+          "id": "page-home",
+          "name": "Home",
+          "slug": "home",
+          "isHomePage": true,
+          "minHeight": 1200,
+          "height": 2000,
+          "sections": []
+        }
+      ],
+      "elements": {
+        "nav": {
+          "id": "nav",
+          "type": "navbar",
+          "pageId": "page-home",
+          "zIndex": 100,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 1200,
+            "height": 80
+          },
+          "props": {
+            "backgroundColor": "#1c1917",
+            "textColor": "#fafaf9"
+          }
+        },
+        "hero-sect": {
+          "id": "hero-sect",
+          "type": "section",
+          "pageId": "page-home",
+          "zIndex": 1,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 1200,
+            "height": 600
+          },
+          "props": {
+            "backgroundColor": "#1c1917"
+          }
+        },
+        "hero-title": {
+          "id": "hero-title",
+          "type": "heading",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 100,
+            "y": 150,
+            "width": 1000,
+            "height": 120
+          },
+          "props": {
+            "content": "Bean & Brew",
+            "fontSize": 80,
+            "fontWeight": 900,
+            "color": "#dec79b",
+            "textAlign": "center",
+            "fontFamily": "Playfair Display"
+          }
+        },
+        "hero-sub": {
+          "id": "hero-sub",
+          "type": "paragraph",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 200,
+            "y": 300,
+            "width": 800,
+            "height": 80
+          },
+          "props": {
+            "content": "Artisan Coffee, Roasted Locally.",
+            "fontSize": 24,
+            "color": "#fafaf9",
+            "textAlign": "center"
+          }
+        },
+        "hero-desc-sub": {
+          "id": "hero-desc-sub",
+          "type": "paragraph",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 300,
+            "y": 380,
+            "width": 600,
+            "height": 60
+          },
+          "props": {
+            "content": "Experience the rich, bold flavors of ethically sourced beans, roasted right here in Seattle.",
+            "fontSize": 16,
+            "color": "#4b5563",
+            "textAlign": "center"
+          }
+        },
+        "about-sect": {
+          "id": "about-sect",
+          "type": "section",
+          "pageId": "page-home",
+          "zIndex": 1,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 600,
+            "width": 1200,
+            "height": 500
+          },
+          "props": {
+            "backgroundColor": "#292524"
+          }
+        },
+        "about-img": {
+          "id": "about-img",
+          "type": "image",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 100,
+            "y": 650,
+            "width": 400,
+            "height": 400
+          },
+          "props": {
+            "src": "https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=1974&auto=format&fit=crop",
+            "alt": "About Us",
+            "objectFit": "cover"
+          }
+        },
+        "about-text": {
+          "id": "about-text",
+          "type": "paragraph",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 550,
+            "y": 700,
+            "width": 500,
+            "height": 300
+          },
+          "props": {
+            "content": "We are dedicated to providing the best service in the industry. Our journey began with a simple idea and has grown into a community of passionate individuals.",
+            "fontSize": 18,
+            "color": "#fafaf9"
+          }
+        },
+        "test-sect": {
+          "id": "test-sect",
+          "type": "section",
+          "pageId": "page-home",
+          "zIndex": 1,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 0,
+            "y": 1100,
+            "width": 1200,
+            "height": 400
+          },
+          "props": {
+            "backgroundColor": "#1c1917"
+          }
+        },
+        "test-quote": {
+          "id": "test-quote",
+          "type": "text",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 200,
+            "y": 1180,
+            "width": 800,
+            "height": 120
+          },
+          "props": {
+            "content": "The best morning brew in the city. Absolutely love the atmosphere!\"",
+            "fontSize": 32,
+            "fontStyle": "italic",
+            "textAlign": "center",
+            "color": "#dec79b"
+          }
+        },
+        "test-author": {
+          "id": "test-author",
+          "type": "text",
+          "pageId": "page-home",
+          "zIndex": 2,
+          "locked": false,
+          "hidden": false,
+          "bounds": {
+            "x": 400,
+            "y": 1320,
+            "width": 400,
+            "height": 40
+          },
+          "props": {
+            "content": "- Sarah Jenkins",
+            "fontSize": 18,
+            "fontWeight": 700,
+            "textAlign": "center",
+            "color": "#fafaf9"
+          }
+        }
+      },
+      "theme": {
+        "colors": {
+          "background": "#1c1917",
+          "primary": "#dec79b",
+          "secondary": "#292524",
+          "accent": "#dec79b",
+          "text": "#fafaf9"
+        },
+        "fonts": {
+          "heading": "Playfair Display",
+          "body": "Inter"
+        }
+      }
+    }
+  }
+}

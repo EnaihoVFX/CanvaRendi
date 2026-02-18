@@ -189,10 +189,23 @@ const categories = [
             { type: 'icon' as ElementType, name: 'Location', icon: Icons.LocationIcon, defaultWidth: 36, defaultHeight: 36, props: { icon: 'location', color: '#EF4444' } },
         ],
     },
+    {
+        id: 'advanced',
+        name: 'Advanced',
+        icon: Icons.StarIcon,
+        items: [
+            { type: 'testimonial' as ElementType, name: 'Testimonial', icon: Icons.QuoteIcon, defaultWidth: 400, defaultHeight: 200, props: { quote: 'This product changed my life!', author: 'Jane Doe', role: 'CEO, Company', rating: 5 } },
+            { type: 'team-member' as ElementType, name: 'Team Member', icon: Icons.UserIcon, defaultWidth: 300, defaultHeight: 400, props: { name: 'John Smith', role: 'Developer', bio: 'Passionate about code.' } },
+            { type: 'progress-bar' as ElementType, name: 'Progress Bar', icon: Icons.ProgressBarIcon, defaultWidth: 300, defaultHeight: 40, props: { value: 70, max: 100, showLabel: true, color: '#116DFF' } },
+            { type: 'countdown' as ElementType, name: 'Countdown', icon: Icons.TimerIcon, defaultWidth: 400, defaultHeight: 100, props: { targetDate: '2025-01-01', style: 'simple' } },
+            { type: 'alert' as ElementType, name: 'Alert Box', icon: Icons.AlertIcon, defaultWidth: 400, defaultHeight: 80, props: { type: 'info', title: 'Note', message: 'This is an important message.', closable: true } },
+            { type: 'badge' as ElementType, name: 'Badge', icon: Icons.TagIcon, defaultWidth: 80, defaultHeight: 30, props: { label: 'New', color: '#10B981', textColor: 'white' } },
+        ],
+    },
 ];
 
 export default function AddElementsPanel() {
-    const { setActivePanel, setDragging, addElement } = useEditorStore();
+    const { setActivePanel, setDragging, addElement, getCurrentPage } = useEditorStore();
     const [searchQuery, setSearchQuery] = useState('');
     const [expandedCategory, setExpandedCategory] = useState<string | null>('text');
 
@@ -212,9 +225,13 @@ export default function AddElementsPanel() {
     };
 
     const handleClick = (item: typeof categories[0]['items'][0]) => {
+        const currentPage = getCurrentPage();
+        if (!currentPage) return;
+
         // Add element to center of canvas on click
         addElement({
             type: item.type,
+            pageId: currentPage.id,
             bounds: {
                 x: 200,
                 y: 150,

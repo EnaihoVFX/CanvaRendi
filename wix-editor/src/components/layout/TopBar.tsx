@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useEditorStore } from '@/store/editorStore';
+import { HomeIcon, PageIcon, SettingsIcon } from '@/components/icons/Icons';
 import styles from './TopBar.module.css';
 
 // SVG Icons
@@ -83,20 +84,37 @@ export default function TopBar() {
 
     const [showPageDropdown, setShowPageDropdown] = useState(false);
     const [showSaveToast, setShowSaveToast] = useState(false);
+    const [showPublishToast, setShowPublishToast] = useState(false);
 
     const currentPage = pages.find(p => p.id === currentPageId);
 
-    const handleSave = () => {
+    const [lastPublishedId, setLastPublishedId] = useState<string | null>(null);
+
+    const handleSave = async () => {
+        await useEditorStore.getState().saveSite();
         setShowSaveToast(true);
         setTimeout(() => setShowSaveToast(false), 2000);
     };
 
     const handlePreview = () => {
-        window.open('/preview', '_blank');
+        // In a real app, this might open a preview mode or window
+        // For now, we'll toggle the preview mode in the editor
+        setPreviewMode(!isPreviewMode);
     };
 
-    const handlePublish = () => {
-        alert('🎉 Site published successfully!\n\nIn a real implementation, this would deploy your site to a live URL.');
+    const handlePublish = async () => {
+        // Remove confirm dialog for smoother experience
+        const siteId = await useEditorStore.getState().publishSite();
+        if (siteId) {
+            setLastPublishedId(siteId);
+            setShowPublishToast(true);
+            setTimeout(() => setShowPublishToast(false), 3000);
+
+            // Optional: Automatically open, or just let the toast show the link
+            // window.open(`/view/${siteId}`, '_blank'); 
+        } else {
+            alert('Failed to publish site.'); // Keep error alert or use error toast
+        }
     };
 
     const handlePageChange = (pageId: string) => {
@@ -140,7 +158,7 @@ export default function TopBar() {
                                     className={`${styles.pageOption} ${page.id === currentPageId ? styles.active : ''}`}
                                     onClick={() => handlePageChange(page.id)}
                                 >
-                                    <span className={styles.pageIcon}>{page.isHomePage ? '🏠' : '📄'}</span>
+                                    <span className={styles.pageIcon}>{page.isHomePage ? <HomeIcon /> : <PageIcon />}</span>
                                     <span>{page.name}</span>
                                 </button>
                             ))}
@@ -152,7 +170,7 @@ export default function TopBar() {
                                     setShowPageDropdown(false);
                                 }}
                             >
-                                <span className={styles.pageIcon}>⚙️</span>
+                                <span className={styles.pageIcon}><SettingsIcon /></span>
                                 <span>Manage Pages</span>
                             </button>
                         </div>
@@ -209,6 +227,11 @@ export default function TopBar() {
 
             {/* Right Section - Actions */}
             <div className={styles.rightSection}>
+                {lastPublishedId && (
+                    <a href={`/view/${lastPublishedId}`} target="_blank" className={styles.viewLink} rel="noreferrer">
+                        View Live Site ↗
+                    </a>
+                )}
                 <button
                     className={`${styles.iconBtn} ${!canUndo() ? styles.disabled : ''}`}
                     onClick={undo}
@@ -229,20 +252,30 @@ export default function TopBar() {
                 <div className={styles.divider} />
 
                 <button className={styles.saveBtn} onClick={handleSave}>
-                    Save
+                    {useEditorStore((state) => state.isSaving) ? 'Saving...' : 'Save'}
                 </button>
-                <button className={styles.previewBtn} onClick={handlePreview}>
-                    Preview
+                <button
+                    className={`${styles.previewBtn} ${isPreviewMode ? styles.active : ''}`}
+                    onClick={handlePreview}
+                >
+                    {isPreviewMode ? 'Exit Preview' : 'Preview'}
                 </button>
                 <button className={styles.publishBtn} onClick={handlePublish}>
-                    Publish
+                    {useEditorStore((state) => state.isPublishing) ? 'Publishing...' : 'Publish'}
                 </button>
             </div>
 
             {/* Save Toast */}
             {showSaveToast && (
                 <div className={styles.saveToast}>
-                    ✓ Changes saved
+                    ✓ Saved
+                </div>
+            )}
+
+            {/* Publish Toast */}
+            {showPublishToast && (
+                <div className={styles.saveToast} style={{ background: '#116DFF' }}>
+                    ✓ Published! <a href={`/view/${lastPublishedId}`} target="_blank" style={{ color: 'white', marginLeft: '5px' }}>View Live</a>
                 </div>
             )}
         </header>

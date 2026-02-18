@@ -1,0 +1,485 @@
+.container {
+    font-family: var(--font-inter), sans-serif;
+    background-color: #f9fafb;
+    /* bg-body */
+    color: #111827;
+    /* text-primary */
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* --- Progress Bar --- */
+.progressContainer {
+    width: 100%;
+    height: 4px;
+    background: #e5e7eb;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 20;
+}
+
+.progressBar {
+    height: 100%;
+    width: 20%;
+    background: #059669;
+    /* ape-green */
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Navigation --- */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 40px;
+    width: 100%;
+    background: #f9fafb;
+    z-index: 10;
+}
+
+.brandWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+.brandWrapper:hover {
+    opacity: 1;
+}
+
+.brandIcon {
+    font-size: 18px;
+    color: #059669;
+}
+
+.brandLogo {
+    font-family: var(--font-playfair), serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #111827;
+}
+
+.modeToggle {
+    background: #e5e7eb;
+    border-radius: 30px;
+    padding: 4px;
+    display: flex;
+    gap: 4px;
+}
+
+.toggleBtn {
+    padding: 8px 24px;
+    border-radius: 24px;
+    border: none;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #6b7280;
+    /* text-secondary */
+    background: transparent;
+}
+
+.toggleBtn.active {
+    background: #ffffff;
+    color: #111827;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Main Content --- */
+.interactionContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    padding: 20px;
+    max-width: 700px;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+}
+
+.aiAvatar {
+    width: 64px;
+    height: 64px;
+    background: #1f2937;
+    /* accent-black */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    transition: transform 0.3s;
+}
+
+.aiAvatar svg {
+    color: #059669;
+    font-size: 24px;
+}
+
+.questionText {
+    font-family: var(--font-playfair), serif;
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 12px;
+    line-height: 1.2;
+    color: #111827;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.subText {
+    color: #6b7280;
+    margin-bottom: 32px;
+    font-size: 16px;
+    min-height: 24px;
+}
+
+/* --- Steps Logic --- */
+.stepContent {
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 0.5s ease;
+}
+
+.stepContent.active {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Form Elements --- */
+.inputGroup {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 24px;
+}
+
+.inputLabel {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #6b7280;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.textInput {
+    width: 100%;
+    padding: 16px;
+    font-size: 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    font-family: var(--font-inter), sans-serif;
+    background: white;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.textInput:focus {
+    border-color: #059669;
+}
+
+/* Social Inputs */
+.socialInputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    width: 100%;
+}
+
+.socialField {
+    position: relative;
+}
+
+.socialField svg {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6b7280;
+}
+
+.socialField input {
+    padding-left: 44px;
+}
+
+/* Scratch Button */
+.scratchDivider {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 16px 0 24px;
+    color: #6b7280;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.scratchDivider::before,
+.scratchDivider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e5e7eb;
+}
+
+.scratchDivider span {
+    padding: 0 12px;
+}
+
+.btnScratch {
+    width: 100%;
+    background: linear-gradient(135deg, #f0fdf4 0%, #d1fae5 100%);
+    border: 1px solid #059669;
+    color: #1f2937;
+    padding: 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: transform 0.1s, box-shadow 0.2s;
+    text-align: left;
+}
+
+.btnScratch:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.15);
+}
+
+/* Name Generator */
+.nameGenWrapper {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+.btnGenName {
+    background: #1f2937;
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Design Cards */
+.designGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+}
+
+.designCard {
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+}
+
+.designCard:hover {
+    border-color: #059669;
+    background: #f0fdf4;
+}
+
+.designCard.selected {
+    border-color: #059669;
+    background: #f0fdf4;
+}
+
+.palettePreview {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.colorDot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+
+/* Feature List */
+.featuresList {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.featureItem {
+    background: white;
+    border: 1px solid #e5e7eb;
+    padding: 16px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.featureItem:hover {
+    border-color: #9ca3af;
+}
+
+.featureItem.selected {
+    border-color: #059669;
+    background: #f0fdf4;
+}
+
+.checkboxFake {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #e5e7eb;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.featureItem.selected .checkboxFake {
+    background: #059669;
+    border-color: #059669;
+}
+
+/* Voice */
+.voiceView {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.voiceView.active {
+    display: flex;
+}
+
+.voiceVisualizer {
+    width: 120px;
+    height: 120px;
+    background: #d1fae5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 32px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.pulseRing {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid #059669;
+    opacity: 0;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Footer */
+.actionBar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 40px 40px;
+    max-width: 800px;
+    margin: 0 auto;
+    background: #f9fafb;
+}
+
+.btnSkip {
+    background: transparent;
+    border: none;
+    color: #6b7280;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btnNext {
+    background: #1f2937;
+    color: white;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s;
+}
+
+.btnNext:hover {
+    background: #000;
+}
+
+@media(max-width: 600px) {
+
+    .socialInputs,
+    .designGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .nav {
+        padding: 16px 20px;
+    }
+
+    .actionBar {
+        padding: 20px;
+    }
+}

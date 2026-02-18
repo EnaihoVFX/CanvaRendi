@@ -1,0 +1,97 @@
+/* LandingPage.module.css */
+.landingContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #000;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+.heroSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    position: relative;
+    background: radial-gradient(circle at center, #222 0%, #000 70%);
+}
+
+.heroTitle {
+    font-size: 5rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(180deg, #ffffff 0%, #666 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    width: 80%;
+    max-width: 1000px;
+    line-height: 1;
+}
+
+.heroSubtitle {
+    font-size: 1.5rem;
+    color: #888;
+    max-width: 600px;
+    margin-bottom: 3rem;
+    line-height: 1.5;
+}
+
+.ctaButton {
+    background: #fff;
+    color: #000;
+    font-size: 1.25rem;
+    font-weight: 600;
+    padding: 1.25rem 3rem;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ctaButton:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+.featuresSection {
+    padding: 8rem 2rem;
+    background-color: #050505;
+}
+
+.featuresGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.featureCard {
+    background: #111;
+    padding: 3rem;
+    border-radius: 20px;
+    border: 1px solid #222;
+    transition: border-color 0.3s ease;
+}
+
+.featureCard:hover {
+    border-color: #444;
+}
+
+.featureTitle {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.featureDescription {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
+}

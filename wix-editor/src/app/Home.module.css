@@ -1,0 +1,235 @@
+.container {
+    background-color: #f9fafb;
+    color: #111827;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: var(--font-inter), sans-serif;
+}
+
+/* --- Navigation --- */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.brandWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.brandIcon {
+    font-size: 20px;
+    color: #059669;
+    /* ape-green */
+}
+
+.brandLogo {
+    font-family: var(--font-playfair), serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: #111827;
+}
+
+.navRight {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.btnLogin {
+    color: #111827;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.btnNavPrimary {
+    background: #1f2937;
+    /* accent-black */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.btnNavPrimary:hover {
+    opacity: 0.9;
+}
+
+/* --- Hero Section --- */
+.heroContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.title {
+    font-family: var(--font-playfair), serif;
+    font-size: 84px;
+    font-weight: 400;
+    line-height: 1.05;
+    margin-bottom: 32px;
+    color: #111827;
+    letter-spacing: -1px;
+}
+
+.heroSub {
+    font-size: 20px;
+    color: #6b7280;
+    /* text-secondary */
+    margin-bottom: 56px;
+    max-width: 600px;
+    font-weight: 300;
+}
+
+/* --- Input Card (Static) --- */
+.inputCard {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 24px;
+    width: 100%;
+    max-width: 720px;
+    height: 200px;
+    position: relative;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    text-align: left;
+}
+
+.inputCard:focus-within {
+    border-color: #9ca3af;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+.inputArea {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    font-family: var(--font-inter), sans-serif;
+    font-size: 20px;
+    color: #111827;
+    background: transparent;
+    padding-bottom: 60px;
+    /* Space for the button */
+}
+
+.inputArea::placeholder {
+    color: #9ca3af;
+    font-weight: 300;
+}
+
+/* The Button */
+.btnStart {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: #1f2937;
+    /* accent-black */
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.1s;
+}
+
+.btnStart:hover {
+    transform: translateY(-1px);
+}
+
+/* --- Trust Indicators --- */
+.trustRow {
+    margin-top: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    color: #111827;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.stars {
+    display: flex;
+    gap: 6px;
+}
+
+.starBox {
+    width: 24px;
+    height: 24px;
+    background-color: #059669;
+    /* ape-green */
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+}
+
+.trustDivider {
+    color: #e5e7eb;
+}
+
+.trustTextSecondary {
+    color: #6b7280;
+}
+
+/* --- Footer --- */
+.footer {
+    text-align: center;
+    padding: 40px;
+    color: #6b7280;
+    font-size: 12px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .title {
+        font-size: 48px;
+    }
+
+    .inputCard {
+        height: 240px;
+    }
+
+    .btnStart {
+        width: calc(100% - 40px);
+        justify-content: center;
+    }
+
+    .nav {
+        padding: 20px;
+    }
+
+    .btnLogin {
+        display: none;
+    }
+}

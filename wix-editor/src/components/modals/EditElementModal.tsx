@@ -3,6 +3,7 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { useEditorStore } from '@/store/editorStore';
 import { CanvasElement, ElementType } from '@/types/editor';
+import { ElementIcons, SettingsIcon, AlignLeftIcon, AlignCenterIcon, AlignRightIcon, AlignJustifyIcon } from '../icons/Icons';
 import styles from './EditElementModal.module.css';
 
 interface EditElementModalProps {
@@ -427,13 +428,24 @@ export default function EditElementModal({ isOpen, onClose, element, initialTab 
                             />
                         </div>
                         <div className={styles.settingGroup}>
-                            <label className={styles.label}>Menu Items (comma separated)</label>
-                            <input
-                                type="text"
-                                className={styles.textInput}
-                                value={(props.items || ['Home', 'About', 'Services', 'Contact']).join(', ')}
-                                onChange={(e) => handleUpdate({ items: e.target.value.split(',').map((s: string) => s.trim()) })}
-                                placeholder="Home, About, Services, Contact"
+                            <label className={styles.label}>Menu Items</label>
+                            <small className={styles.hint}>Format: Label | URL (one per line)</small>
+                            <textarea
+                                className={styles.textarea}
+                                value={(props.items || ['Home', 'About', 'Services', 'Contact'])
+                                    .map((item: any) => typeof item === 'string' ? item : `${item.label} | ${item.url || ''}`)
+                                    .join('\n')}
+                                onChange={(e) => handleUpdate({
+                                    items: e.target.value.split('\n').filter((s: string) => s.trim()).map((line: string) => {
+                                        if (line.includes('|')) {
+                                            const [label, url] = line.split('|');
+                                            return { label: label.trim(), url: url.trim() };
+                                        }
+                                        return { label: line.trim(), url: '' };
+                                    })
+                                })}
+                                placeholder="Home | /&#10;About | /about&#10;Services | /services"
+                                rows={6}
                             />
                         </div>
                         <div className={styles.settingGroup}>
@@ -454,13 +466,24 @@ export default function EditElementModal({ isOpen, onClose, element, initialTab 
                 return (
                     <div className={styles.settingsSection}>
                         <div className={styles.settingGroup}>
-                            <label className={styles.label}>Menu Items (comma separated)</label>
-                            <input
-                                type="text"
-                                className={styles.textInput}
-                                value={(props.items || ['Home', 'About', 'Services', 'Contact']).join(', ')}
-                                onChange={(e) => handleUpdate({ items: e.target.value.split(',').map((s: string) => s.trim()) })}
-                                placeholder="Home, About, Services, Contact"
+                            <label className={styles.label}>Menu Items</label>
+                            <small className={styles.hint}>Format: Label | URL (one per line)</small>
+                            <textarea
+                                className={styles.textarea}
+                                value={(props.items || ['Home', 'About', 'Services', 'Contact'])
+                                    .map((item: any) => typeof item === 'string' ? item : `${item.label} | ${item.url || ''}`)
+                                    .join('\n')}
+                                onChange={(e) => handleUpdate({
+                                    items: e.target.value.split('\n').filter((s: string) => s.trim()).map((line: string) => {
+                                        if (line.includes('|')) {
+                                            const [label, url] = line.split('|');
+                                            return { label: label.trim(), url: url.trim() };
+                                        }
+                                        return { label: line.trim(), url: '' };
+                                    })
+                                })}
+                                placeholder="Home | /&#10;About | /about"
+                                rows={6}
                             />
                         </div>
                         <div className={styles.settingGroup}>
@@ -474,6 +497,64 @@ export default function EditElementModal({ isOpen, onClose, element, initialTab 
                                 <option value="horizontal">Horizontal</option>
                             </select>
                         </div>
+                    </div>
+                );
+
+            // ===== FOOTER =====
+            case 'footer':
+                const footerCols = Array.isArray(props.columns) ? props.columns : [
+                    { title: 'Company', links: ['About Us', 'Careers'] },
+                    { title: 'Support', links: ['Help Center', 'Contact'] },
+                    { title: 'Legal', links: ['Privacy', 'Terms'] }
+                ];
+
+                const updateFooterCol = (index: number, updates: any) => {
+                    const newCols = [...footerCols];
+                    newCols[index] = { ...newCols[index], ...updates };
+                    handleUpdate({ columns: newCols });
+                };
+
+                return (
+                    <div className={styles.settingsSection}>
+                        <div className={styles.settingGroup}>
+                            <label className={styles.label}>Copyright Text</label>
+                            <input
+                                type="text"
+                                className={styles.textInput}
+                                value={props.copyright || '© 2024 Your Company. All rights reserved.'}
+                                onChange={(e) => handleUpdate({ copyright: e.target.value })}
+                            />
+                        </div>
+
+                        {footerCols.map((col, i) => (
+                            <div key={i} className={styles.settingGroup} style={{ borderTop: i > 0 ? '1px solid #eee' : 'none', paddingTop: i > 0 ? 12 : 0 }}>
+                                <label className={styles.label}>Column {i + 1}</label>
+                                <input
+                                    type="text"
+                                    className={styles.textInput}
+                                    value={col.title}
+                                    onChange={(e) => updateFooterCol(i, { title: e.target.value })}
+                                    placeholder="Column Title"
+                                    style={{ marginBottom: 8 }}
+                                />
+                                <textarea
+                                    className={styles.textarea}
+                                    value={col.links.map((l: any) => typeof l === 'string' ? l : `${l.label} | ${l.url || ''}`).join('\n')}
+                                    onChange={(e) => {
+                                        const newLinks = e.target.value.split('\n').filter((s: string) => s.trim()).map((line: string) => {
+                                            if (line.includes('|')) {
+                                                const [label, url] = line.split('|');
+                                                return { label: label.trim(), url: url.trim() };
+                                            }
+                                            return { label: line.trim(), url: '' };
+                                        });
+                                        updateFooterCol(i, { links: newLinks });
+                                    }}
+                                    placeholder="Link Label | /url"
+                                    rows={4}
+                                />
+                            </div>
+                        ))}
                     </div>
                 );
 
@@ -497,7 +578,7 @@ export default function EditElementModal({ isOpen, onClose, element, initialTab 
                                 <label className={styles.checkboxItem}>
                                     <input
                                         type="checkbox"
-                                        checked={props.showName ?? true}
+                                        checked={props.showName !== false}
                                         onChange={(e) => handleUpdate({ showName: e.target.checked })}
                                     />
                                     <span>Name Field</span>
@@ -505,7 +586,7 @@ export default function EditElementModal({ isOpen, onClose, element, initialTab 
                                 <label className={styles.checkboxItem}>
                                     <input
                                         type="checkbox"
-                                        checked={props.showEmail ?? true}
+                                        checked={props.showEmail !== false}
                                         onChange={(e) => handleUpdate({ showEmail: e.target.checked })}
                                     />
                                     <span>Email Field</span>
@@ -513,7 +594,7 @@ export default function EditElementModal({ isOpen, onClose, element, initialTab 
                                 <label className={styles.checkboxItem}>
                                     <input
                                         type="checkbox"
-                                        checked={props.showPhone ?? false}
+                                        checked={props.showPhone || false}
                                         onChange={(e) => handleUpdate({ showPhone: e.target.checked })}
                                     />
                                     <span>Phone Field</span>
@@ -521,7 +602,7 @@ export default function EditElementModal({ isOpen, onClose, element, initialTab 
                                 <label className={styles.checkboxItem}>
                                     <input
                                         type="checkbox"
-                                        checked={props.showMessage ?? true}
+                                        checked={props.showMessage !== false}
                                         onChange={(e) => handleUpdate({ showMessage: e.target.checked })}
                                     />
                                     <span>Message Field</span>
@@ -652,6 +733,7 @@ export default function EditElementModal({ isOpen, onClose, element, initialTab 
 
             // ===== SOCIAL ICONS =====
             case 'social-icons':
+                const selectedIcons = props.icons || ['facebook', 'instagram', 'twitter', 'linkedin'];
                 return (
                     <div className={styles.settingsSection}>
                         <div className={styles.settingGroup}>
@@ -659,12 +741,34 @@ export default function EditElementModal({ isOpen, onClose, element, initialTab 
                             <input
                                 type="text"
                                 className={styles.textInput}
-                                value={(props.icons || ['facebook', 'instagram', 'twitter', 'linkedin']).join(', ')}
+                                value={selectedIcons.join(', ')}
                                 onChange={(e) => handleUpdate({ icons: e.target.value.split(',').map((s: string) => s.trim().toLowerCase()) })}
                                 placeholder="facebook, instagram, twitter, linkedin"
                             />
                             <small className={styles.hint}>Available: facebook, instagram, twitter, linkedin, youtube, tiktok</small>
                         </div>
+
+                        {selectedIcons.length > 0 && (
+                            <div className={styles.settingGroup}>
+                                <label className={styles.label}>Links</label>
+                                {selectedIcons.map((icon: string) => (
+                                    <div key={icon} className={styles.inputGroup} style={{ marginBottom: 8, display: 'flex', alignItems: 'center', gap: 8 }}>
+                                        <span style={{ width: 80, fontSize: 13, textTransform: 'capitalize' }}>{icon}:</span>
+                                        <input
+                                            type="text"
+                                            className={styles.textInput}
+                                            value={props.links?.[icon] || ''}
+                                            onChange={(e) => handleUpdate({
+                                                links: { ...props.links, [icon]: e.target.value }
+                                            })}
+                                            placeholder={`https://${icon}.com/...`}
+                                            style={{ flex: 1 }}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+
                         <div className={styles.settingGroup}>
                             <label className={styles.label}>Icon Color</label>
                             <div className={styles.colorGrid}>
@@ -879,25 +983,27 @@ export default function EditElementModal({ isOpen, onClose, element, initialTab 
                 return (
                     <div className={styles.settingsSection}>
                         <div className={styles.settingGroup}>
-                            <label className={styles.label}>Columns</label>
+                            <label className={styles.label}>Headers (comma separated)</label>
                             <input
-                                type="number"
-                                className={styles.numberInput}
-                                min={1}
-                                max={10}
-                                value={props.columns || 3}
-                                onChange={(e) => handleUpdate({ columns: parseInt(e.target.value) })}
+                                type="text"
+                                className={styles.textInput}
+                                value={(props.headers || ['Name', 'Role', 'Status']).join(', ')}
+                                onChange={(e) => handleUpdate({ headers: e.target.value.split(',').map((s: string) => s.trim()) })}
+                                placeholder="Name, Role, Status"
                             />
                         </div>
                         <div className={styles.settingGroup}>
-                            <label className={styles.label}>Rows</label>
-                            <input
-                                type="number"
-                                className={styles.numberInput}
-                                min={2}
-                                max={20}
-                                value={props.rows || 3}
-                                onChange={(e) => handleUpdate({ rows: parseInt(e.target.value) })}
+                            <label className={styles.label}>Rows (one per line, comma separated)</label>
+                            <textarea
+                                className={styles.textarea}
+                                value={(props.rows || [['John Doe', 'Admin', 'Active']]).map((r: string[]) => r.join(', ')).join('\n')}
+                                onChange={(e) => handleUpdate({
+                                    rows: e.target.value.split('\n').filter((s: string) => s.trim()).map((line: string) =>
+                                        line.split(',').map((cell: string) => cell.trim())
+                                    )
+                                })}
+                                placeholder="John Doe, Admin, Active&#10;Jane Smith, Editor, Pending"
+                                rows={6}
                             />
                         </div>
                     </div>
@@ -934,11 +1040,57 @@ export default function EditElementModal({ isOpen, onClose, element, initialTab 
                     </div>
                 );
 
+            // ===== HTML / EMBED =====
+            case 'html':
+                return (
+                    <div className={styles.settingsSection}>
+                        <div className={styles.settingGroup}>
+                            <label className={styles.label}>HTML Code</label>
+                            <textarea
+                                className={styles.textarea}
+                                value={props.code || ''}
+                                onChange={(e) => handleUpdate({ code: e.target.value })}
+                                placeholder="&lt;div&gt;Your HTML implementation here&lt;/div&gt;"
+                                rows={10}
+                                style={{ fontFamily: 'monospace', fontSize: '12px' }}
+                            />
+                        </div>
+                    </div>
+                );
+
+            case 'embed':
+                return (
+                    <div className={styles.settingsSection}>
+                        <div className={styles.settingGroup}>
+                            <label className={styles.label}>Embed URL</label>
+                            <input
+                                type="text"
+                                className={styles.textInput}
+                                value={props.src || ''}
+                                onChange={(e) => handleUpdate({ src: e.target.value })}
+                                placeholder="https://example.com"
+                            />
+                        </div>
+                    </div>
+                );
+
             // ===== GALLERY =====
             case 'gallery':
             case 'slideshow':
                 return (
                     <div className={styles.settingsSection}>
+                        <div className={styles.settingGroup}>
+                            <label className={styles.label}>Images (one URL per line)</label>
+                            <textarea
+                                className={styles.textarea}
+                                value={(props.images || []).join('\n')}
+                                onChange={(e) => handleUpdate({
+                                    images: e.target.value.split('\n').filter((s: string) => s.trim())
+                                })}
+                                placeholder="https://example.com/image1.jpg&#10;https://example.com/image2.jpg"
+                                rows={6}
+                            />
+                        </div>
                         <div className={styles.settingGroup}>
                             <label className={styles.label}>Columns</label>
                             <input
@@ -963,6 +1115,153 @@ export default function EditElementModal({ isOpen, onClose, element, initialTab 
                                 />
                                 <span className={styles.sliderValue}>{props.gap || 8}px</span>
                             </div>
+                        </div>
+                    </div>
+                );
+
+            // ===== E-COMMERCE =====
+            case 'product-card':
+                return (
+                    <div className={styles.settingsSection}>
+                        <div className={styles.settingGroup}>
+                            <label className={styles.label}>Product Name</label>
+                            <input
+                                type="text"
+                                className={styles.textInput}
+                                value={props.name || ''}
+                                onChange={(e) => handleUpdate({ name: e.target.value })}
+                                placeholder="Product Name"
+                            />
+                        </div>
+                        <div className={styles.settingGroup}>
+                            <label className={styles.label}>Price</label>
+                            <input
+                                type="text"
+                                className={styles.textInput}
+                                value={props.price || ''}
+                                onChange={(e) => handleUpdate({ price: e.target.value })}
+                                placeholder="$99.00"
+                            />
+                        </div>
+                        <div className={styles.settingGroup}>
+                            <label className={styles.label}>Rating (1-5)</label>
+                            <input
+                                type="number"
+                                min="1"
+                                max="5"
+                                className={styles.numberInput}
+                                value={props.rating || 5}
+                                onChange={(e) => handleUpdate({ rating: parseInt(e.target.value) })}
+                            />
+                        </div>
+                        <div className={styles.settingGroup}>
+                            <label className={styles.label}>Button Text</label>
+                            <input
+                                type="text"
+                                className={styles.textInput}
+                                value={props.buttonText || ''}
+                                onChange={(e) => handleUpdate({ buttonText: e.target.value })}
+                                placeholder="Add to Cart"
+                            />
+                        </div>
+                        <div className={styles.settingGroup}>
+                            <label className={styles.label}>Image URL</label>
+                            <input
+                                type="text"
+                                className={styles.textInput}
+                                value={props.image || ''}
+                                onChange={(e) => handleUpdate({ image: e.target.value })}
+                                placeholder="https://..."
+                            />
+                        </div>
+                    </div>
+                );
+
+            case 'price':
+                return (
+                    <div className={styles.settingsSection}>
+                        <div className={styles.settingGroup}>
+                            <label className={styles.label}>Price</label>
+                            <input
+                                type="text"
+                                className={styles.textInput}
+                                value={props.price || ''}
+                                onChange={(e) => handleUpdate({ price: e.target.value })}
+                                placeholder="$99.00"
+                            />
+                        </div>
+                    </div>
+                );
+
+            case 'cart-button':
+                return (
+                    <div className={styles.settingsSection}>
+                        <div className={styles.settingGroup}>
+                            <label className={styles.label}>Button Label</label>
+                            <input
+                                type="text"
+                                className={styles.textInput}
+                                value={props.label || ''}
+                                onChange={(e) => handleUpdate({ label: e.target.value })}
+                                placeholder="Cart (0)"
+                            />
+                        </div>
+                    </div>
+                );
+
+            // ===== BLOG =====
+            case 'blog-card':
+                return (
+                    <div className={styles.settingsSection}>
+                        <div className={styles.settingGroup}>
+                            <label className={styles.label}>Title</label>
+                            <input
+                                type="text"
+                                className={styles.textInput}
+                                value={props.title || ''}
+                                onChange={(e) => handleUpdate({ title: e.target.value })}
+                                placeholder="Blog Post Title"
+                            />
+                        </div>
+                        <div className={styles.settingGroup}>
+                            <label className={styles.label}>Date</label>
+                            <input
+                                type="text"
+                                className={styles.textInput}
+                                value={props.date || ''}
+                                onChange={(e) => handleUpdate({ date: e.target.value })}
+                                placeholder="Oct 24, 2023"
+                            />
+                        </div>
+                        <div className={styles.settingGroup}>
+                            <label className={styles.label}>Excerpt</label>
+                            <textarea
+                                className={styles.textarea}
+                                value={props.excerpt || ''}
+                                onChange={(e) => handleUpdate({ excerpt: e.target.value })}
+                                placeholder="Brief description of the post..."
+                                rows={3}
+                            />
+                        </div>
+                        <div className={styles.settingGroup}>
+                            <label className={styles.label}>Image URL</label>
+                            <input
+                                type="text"
+                                className={styles.textInput}
+                                value={props.image || ''}
+                                onChange={(e) => handleUpdate({ image: e.target.value })}
+                                placeholder="https://..."
+                            />
+                        </div>
+                        <div className={styles.settingGroup}>
+                            <label className={styles.label}>Link URL</label>
+                            <input
+                                type="text"
+                                className={styles.textInput}
+                                value={props.link || ''}
+                                onChange={(e) => handleUpdate({ link: e.target.value })}
+                                placeholder="/blog/post-1"
+                            />
                         </div>
                     </div>
                 );
@@ -1173,10 +1472,10 @@ export default function EditElementModal({ isOpen, onClose, element, initialTab 
                             onClick={() => handleUpdate({ textAlign: align })}
                             title={align.charAt(0).toUpperCase() + align.slice(1)}
                         >
-                            {align === 'left' && '⬅'}
-                            {align === 'center' && '⬌'}
-                            {align === 'right' && '➡'}
-                            {align === 'justify' && '☰'}
+                            {align === 'left' && <AlignLeftIcon />}
+                            {align === 'center' && <AlignCenterIcon />}
+                            {align === 'right' && <AlignRightIcon />}
+                            {align === 'justify' && <AlignJustifyIcon />}
                         </button>
                     ))}
                 </div>
@@ -1184,62 +1483,94 @@ export default function EditElementModal({ isOpen, onClose, element, initialTab 
         </div>
     );
 
+    const handleAnimationUpdate = (updates: Partial<any>) => {
+        const currentAnimation = element.animation || {
+            type: 'none',
+            duration: 0.5,
+            delay: 0,
+            ease: 'ease-out'
+        };
+
+        updateElement(element.id, {
+            animation: { ...currentAnimation, ...updates }
+        });
+    };
+
     const renderAnimationSettings = () => (
         <div className={styles.settingsSection}>
             <div className={styles.settingGroup}>
                 <label className={styles.label}>Entrance Animation</label>
                 <select
                     className={styles.select}
-                    value={props.animation || 'none'}
-                    onChange={(e) => handleUpdate({ animation: e.target.value })}
+                    value={element.animation?.type || 'none'}
+                    onChange={(e) => handleAnimationUpdate({ type: e.target.value })}
                 >
                     <option value="none">None</option>
-                    <option value="fadeIn">Fade In</option>
-                    <option value="slideUp">Slide Up</option>
-                    <option value="slideDown">Slide Down</option>
-                    <option value="slideLeft">Slide Left</option>
-                    <option value="slideRight">Slide Right</option>
-                    <option value="zoomIn">Zoom In</option>
-                    <option value="bounce">Bounce</option>
-                    <option value="flip">Flip</option>
+                    <option value="fade-in">Fade In</option>
+                    <option value="slide-up">Slide Up</option>
+                    <option value="slide-down">Slide Down</option>
+                    <option value="slide-left">Slide Left</option>
+                    <option value="slide-right">Slide Right</option>
+                    <option value="scale-up">Scale Up</option>
+                    <option value="rotate-in">Rotate In</option>
+                    <option value="bounce-in">Bounce In</option>
                 </select>
             </div>
 
-            <div className={styles.settingGroup}>
-                <label className={styles.label}>Animation Duration</label>
-                <div className={styles.sliderRow}>
-                    <input
-                        type="range"
-                        min="0.1"
-                        max="2"
-                        step="0.1"
-                        value={props.animationDuration || 0.5}
-                        onChange={(e) => handleUpdate({ animationDuration: parseFloat(e.target.value) })}
-                        className={styles.slider}
-                    />
-                    <span className={styles.sliderValue}>{props.animationDuration || 0.5}s</span>
-                </div>
-            </div>
+            {element.animation?.type && element.animation.type !== 'none' && (
+                <>
+                    <div className={styles.settingGroup}>
+                        <label className={styles.label}>Animation Duration</label>
+                        <div className={styles.sliderRow}>
+                            <input
+                                type="range"
+                                min="0.1"
+                                max="3"
+                                step="0.1"
+                                value={element.animation?.duration || 0.5}
+                                onChange={(e) => handleAnimationUpdate({ duration: parseFloat(e.target.value) })}
+                                className={styles.slider}
+                            />
+                            <span className={styles.sliderValue}>{element.animation?.duration || 0.5}s</span>
+                        </div>
+                    </div>
 
-            <div className={styles.settingGroup}>
-                <label className={styles.label}>Animation Delay</label>
-                <div className={styles.sliderRow}>
-                    <input
-                        type="range"
-                        min="0"
-                        max="2"
-                        step="0.1"
-                        value={props.animationDelay || 0}
-                        onChange={(e) => handleUpdate({ animationDelay: parseFloat(e.target.value) })}
-                        className={styles.slider}
-                    />
-                    <span className={styles.sliderValue}>{props.animationDelay || 0}s</span>
-                </div>
-            </div>
+                    <div className={styles.settingGroup}>
+                        <label className={styles.label}>Animation Delay</label>
+                        <div className={styles.sliderRow}>
+                            <input
+                                type="range"
+                                min="0"
+                                max="5"
+                                step="0.1"
+                                value={element.animation?.delay || 0}
+                                onChange={(e) => handleAnimationUpdate({ delay: parseFloat(e.target.value) })}
+                                className={styles.slider}
+                            />
+                            <span className={styles.sliderValue}>{element.animation?.delay || 0}s</span>
+                        </div>
+                    </div>
+
+                    <div className={styles.settingGroup}>
+                        <label className={styles.label}>Easing</label>
+                        <select
+                            className={styles.select}
+                            value={element.animation?.ease || 'ease-out'}
+                            onChange={(e) => handleAnimationUpdate({ ease: e.target.value })}
+                        >
+                            <option value="linear">Linear</option>
+                            <option value="ease">Ease</option>
+                            <option value="ease-in">Ease In</option>
+                            <option value="ease-out">Ease Out</option>
+                            <option value="ease-in-out">Ease In Out</option>
+                        </select>
+                    </div>
+                </>
+            )}
 
             <div className={styles.comingSoon}>
-                <span className={styles.badge}>Coming Soon</span>
-                <p>Scroll animations, hover effects, and more advanced animation controls will be available soon.</p>
+                <span className={styles.badge}>Preview</span>
+                <p>Animations will play automatically when the element scrolls into view on your published site.</p>
             </div>
         </div>
     );
@@ -1257,13 +1588,10 @@ export default function EditElementModal({ isOpen, onClose, element, initialTab 
             <div ref={headerRef} className={styles.header}>
                 <div className={styles.headerTitle}>
                     <span className={styles.elementIcon}>
-                        {element.type === 'text' && '📝'}
-                        {element.type === 'heading' && '📰'}
-                        {element.type === 'button' && '🔘'}
-                        {element.type === 'image' && '🖼'}
-                        {element.type === 'box' && '📦'}
-                        {element.type === 'section' && '📋'}
-                        {!['text', 'heading', 'button', 'image', 'box', 'section'].includes(element.type) && '⚙️'}
+                        {(() => {
+                            const Icon = ElementIcons[element.type] || SettingsIcon;
+                            return <Icon />;
+                        })()}
                     </span>
                     <span>Edit {getElementLabel(element.type)}</span>
                 </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { useEditorStore } from '@/store/editorStore';
 import TopBar from './TopBar';
 import LeftSidebar from './LeftSidebar';
@@ -12,12 +12,69 @@ import SettingsPanel from '../panels/SettingsPanel';
 import MediaPanel from '../panels/MediaPanel';
 import styles from './EditorLayout.module.css';
 
-export default function EditorLayout() {
-    const { activePanelId, isPreviewMode, setActivePanel, setPreviewMode } = useEditorStore();
+import MobileCanvasEditor from '../editor/MobileCanvasEditor';
+import { useMobile } from '@/hooks/useMobile';
+import { SiteData } from '@/types/editor';
+
+interface EditorLayoutProps {
+    initialData?: SiteData;
+    siteId?: string;
+}
+
+export default function EditorLayout({ initialData, siteId }: EditorLayoutProps) {
+    const { activePanelId, isPreviewMode, setActivePanel, setPreviewMode, setInitialData, setSiteId, siteId: storeSiteId } = useEditorStore();
     const [showSettings, setShowSettings] = useState(false);
+    const isMobile = useMobile();
+    const hasLoaded = useRef(false);
+
+    // Force load server data on mount or when siteId changes
+    useEffect(() => {
+        if (!initialData || !siteId) return;
+        if (hasLoaded.current && storeSiteId === siteId) return;
+
+        hasLoaded.current = true;
+
+        // The store expects a flat elements dict: Record<string, CanvasElement>
+        // But the DB returns elements nested inside pages[].elements[]
+        // Extract them into the flat dict format
+        let elementsDict: Record<string, any> = {};
+
+        if (initialData.pages) {
+            for (const page of initialData.pages) {
+                if (Array.isArray(page.elements)) {
+                    for (const el of page.elements) {
+                        if (el && el.id) {
+                            elementsDict[el.id] = {
+                                ...el,
+                                pageId: el.pageId || page.id,
+                            };
+                        }
+                    }
+                }
+            }
+        }
+
+        // If initialData.elements already has content, merge it (backward compat)
+        if (initialData.elements && Object.keys(initialData.elements).length > 0) {
+            elementsDict = { ...elementsDict, ...initialData.elements };
+        }
+
+        console.log(`[EDITOR] Loading site "${siteId}" with ${Object.keys(elementsDict).length} elements`);
+
+        setSiteId(siteId);
+        setInitialData({
+            pages: initialData.pages,
+            elements: elementsDict,
+            theme: initialData.theme
+        });
+    }, [initialData, siteId, storeSiteId, setInitialData, setSiteId]);
+
+    if (isMobile) {
+        return <MobileCanvasEditor />;
+    }
 
     return (
-        <div className={styles.editorContainer}>
+        <div className={styles.editorContainer} suppressHydrationWarning>
             {/* Top Bar */}
             {!isPreviewMode && <TopBar />}
 

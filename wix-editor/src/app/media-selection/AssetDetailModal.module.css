@@ -1,0 +1,340 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modalContainer {
+    width: 90vw;
+    height: 90vh;
+    background: #ffffff;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* --- Navigation --- */
+.nav {
+    display: flex;
+    align-items: center;
+    padding: 16px 24px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    z-index: 10;
+}
+
+.btnBack {
+    background: none;
+    border: none;
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.btnBack:hover {
+    color: #111827;
+}
+
+/* --- Main Layout --- */
+.detailContent {
+    flex: 1;
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* --- Left: Preview Area --- */
+.previewArea {
+    flex: 2;
+    background: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.previewArea::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(45deg, #e5e7eb 25%, transparent 25%),
+        linear-gradient(-45deg, #e5e7eb 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #e5e7eb 75%),
+        linear-gradient(-45deg, transparent 75%, #e5e7eb 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    opacity: 0.1;
+    z-index: 0;
+}
+
+.assetWrapper {
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 90%;
+    max-height: 90%;
+    background: white;
+    /* Ensure non-transparent assets have bg */
+}
+
+.assetImage {
+    display: block;
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+}
+
+.assetTextPreview {
+    padding: 40px;
+    font-family: var(--font-playfair), serif;
+    font-size: 24px;
+    line-height: 1.4;
+    text-align: center;
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+}
+
+/* --- Right: Info Panel --- */
+.infoPanel {
+    flex: 1;
+    background: #ffffff;
+    border-left: 1px solid #e5e7eb;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    min-width: 400px;
+    max-width: 500px;
+}
+
+.assetMetaHeader {
+    margin-bottom: 32px;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 24px;
+}
+
+.assetType {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #6b7280;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.assetTitle {
+    font-family: var(--font-playfair), serif;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    line-height: 1.2;
+}
+
+/* Tags */
+.tagRow {
+    display: flex;
+    gap: 8px;
+}
+
+.badge {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.badgeSource {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+.badgeStatus {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.badgeAi {
+    background: #f3e8ff;
+    color: #7e22ce;
+}
+
+/* Description Block */
+.infoBlock {
+    margin-bottom: 32px;
+}
+
+.infoLabel {
+    font-size: 13px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.infoText {
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+/* AI Reasoning Box */
+.aiReasoning {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 32px;
+}
+
+.aiTitle {
+    font-size: 13px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.aiTitle svg {
+    color: #7c3aed;
+}
+
+.scoreRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 13px;
+}
+
+.progressMini {
+    width: 100px;
+    height: 6px;
+    background: #e5e7eb;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    background: #059669;
+}
+
+/* Action Buttons */
+.actionsFooter {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btnPrimary {
+    background: #1f2937;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.btnPrimary:hover {
+    background: #000;
+}
+
+.btnSecondary {
+    background: white;
+    color: #111827;
+    border: 1px solid #e5e7eb;
+    padding: 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.btnSecondary:hover {
+    background: #f9fafb;
+}
+
+.btnDangerText {
+    background: transparent;
+    color: #ef4444;
+    border: none;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+@media (max-width: 900px) {
+    .detailContent {
+        flex-direction: column;
+        overflow-y: auto;
+    }
+
+    .previewArea {
+        min-height: 400px;
+        flex: none;
+    }
+
+    .infoPanel {
+        flex: none;
+        min-width: 100%;
+        max-width: 100%;
+        border-left: none;
+        border-top: 1px solid #e5e7eb;
+    }
+}

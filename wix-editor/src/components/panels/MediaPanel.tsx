@@ -46,7 +46,7 @@ const stockImages = [
 ];
 
 export default function MediaPanel() {
-    const { addElement, setActivePanel } = useEditorStore();
+    const { addElement, setActivePanel, getCurrentPage } = useEditorStore();
     const [activeTab, setActiveTab] = useState<'upload' | 'url' | 'stock'>('upload');
     const [urlInput, setUrlInput] = useState('');
     const [isDragOver, setIsDragOver] = useState(false);
@@ -91,8 +91,12 @@ export default function MediaPanel() {
     };
 
     const addImageToCanvas = (src: string, alt: string = 'Image') => {
+        const currentPage = getCurrentPage();
+        if (!currentPage) return;
+
         addElement({
             type: 'image',
+            pageId: currentPage.id,
             bounds: { x: 100, y: 100, width: 300, height: 200 },
             props: { src, alt },
             locked: false,

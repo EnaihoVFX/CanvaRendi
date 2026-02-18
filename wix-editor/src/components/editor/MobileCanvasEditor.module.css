@@ -1,0 +1,214 @@
+:root {
+    --ape-green: #059669;
+    --brand-beige: #F5F0EB;
+    --editor-bg: #e5e7eb;
+}
+
+.fontSerifDisplay {
+    font-family: var(--font-playfair), serif;
+}
+
+.noScrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* --- THE CANVAS (Scrollable Area) --- */
+.canvasViewport {
+    height: 100vh;
+    width: 100%;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    /* Padding ensures content isn't hidden behind fixed UI elements */
+    padding-top: 90px;
+    padding-bottom: 200px;
+    background-color: var(--editor-bg);
+}
+
+/* The Website "Sheet" */
+.websiteContent {
+    background: white;
+    min-height: 100vh;
+    /* Visual polish: Make it look like a page */
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    position: relative;
+}
+
+/* --- SELECTION STYLING --- */
+.editable {
+    position: relative;
+    border: 2px solid transparent;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.editable.selected {
+    border-color: var(--ape-green);
+    background-color: rgba(5, 150, 105, 0.03);
+}
+
+.editable.selected::before {
+    content: attr(data-type);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    /* Position label inside or near top */
+    background: var(--ape-green);
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    z-index: 10;
+    animation: popIn 0.2s ease-out;
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* --- UI OVERLAY (Fixed Controls) --- */
+.topBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding: 16px;
+    /* Gradient fade to blend with background */
+    background: linear-gradient(to bottom, var(--editor-bg) 80%, transparent);
+    pointer-events: none;
+    /* Allow scrolling underneath */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.bottomPanel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    /* Only contents catch clicks */
+    pointer-events: none;
+}
+
+/* UI Elements (Clickable) */
+.uiElement {
+    pointer-events: auto;
+}
+
+.glassPill {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.aiContainer {
+    background: var(--brand-beige);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.15);
+    border-radius: 24px 24px 0 0;
+    pointer-events: auto;
+    width: 100%;
+    padding-bottom: 32px;
+    padding-top: 8px;
+    position: relative;
+}
+
+/* Visualizer */
+.voiceVizContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.2s;
+    position: absolute;
+    inset: 0;
+    background: var(--brand-beige);
+    z-index: 20;
+    border-radius: 12px;
+    pointer-events: none;
+}
+
+.voiceVizContainer.active {
+    opacity: 1;
+}
+
+.bar {
+    width: 3px;
+    background: var(--ape-green);
+    border-radius: 2px;
+    animation: sound 0s infinite ease-in-out;
+}
+
+.voiceVizContainer.active .bar {
+    animation-duration: 0.4s;
+}
+
+@keyframes sound {
+
+    0%,
+    100% {
+        height: 6px;
+    }
+
+    50% {
+        height: 20px;
+    }
+}
+
+/* Chips */
+.chipContainer {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 0 20px 12px 20px;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: all 0.3s ease-out;
+    scrollbar-width: none;
+}
+
+.chipContainer::-webkit-scrollbar {
+    display: none;
+}
+
+.chipContainer.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.chip {
+    background: white;
+    border: 1px solid #e5e5e5;
+    color: #4b5563;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+    transition: all 0.2s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+}
+
+.chip:active {
+    transform: scale(0.95);
+    background: #f3f4f6;
+}

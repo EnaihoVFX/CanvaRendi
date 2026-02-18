@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { LinkIcon, PageIcon, EmailIcon, PhoneIcon } from '../icons/Icons';
 import styles from './LinkModal.module.css';
 
 interface LinkModalProps {
@@ -46,25 +47,25 @@ export default function LinkModal({ isOpen, onClose, onSubmit, currentLink }: Li
                             className={`${styles.typeBtn} ${linkType === 'url' ? styles.active : ''}`}
                             onClick={() => setLinkType('url')}
                         >
-                            🔗 URL
+                            <LinkIcon /> URL
                         </button>
                         <button
                             className={`${styles.typeBtn} ${linkType === 'page' ? styles.active : ''}`}
                             onClick={() => setLinkType('page')}
                         >
-                            📄 Page
+                            <PageIcon /> Page
                         </button>
                         <button
                             className={`${styles.typeBtn} ${linkType === 'email' ? styles.active : ''}`}
                             onClick={() => setLinkType('email')}
                         >
-                            ✉️ Email
+                            <EmailIcon /> Email
                         </button>
                         <button
                             className={`${styles.typeBtn} ${linkType === 'phone' ? styles.active : ''}`}
                             onClick={() => setLinkType('phone')}
                         >
-                            📞 Phone
+                            <PhoneIcon /> Phone
                         </button>
                     </div>
 

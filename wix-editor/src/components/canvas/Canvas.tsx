@@ -8,8 +8,19 @@ import ContextMenu from './ContextMenu';
 import styles from './Canvas.module.css';
 import { Page } from '@/types/editor';
 
+interface DeviceSpec {
+    name: string;
+    width: number;
+    height: number;
+    frame: boolean;
+    borderRadius?: number;
+    bezel?: number;
+    notch?: boolean;
+    dynamicIsland?: boolean;
+}
+
 // Real device specifications
-const DEVICES = {
+const DEVICES: Record<string, DeviceSpec> = {
     desktop: {
         name: 'Desktop',
         width: 1280,
@@ -76,11 +87,15 @@ export default function Canvas() {
     // Get current device specs
     const device = DEVICES[deviceMode] || DEVICES.desktop;
     const canvasWidth = device.width;
-    // Use page height for desktop, device height for mobile/tablet
-    // Fallback to 1200 if page height is undefined (legacy pages from localStorage)
-    const canvasHeight = deviceMode === 'desktop' && currentPage
-        ? (currentPage.height || 1200)
-        : device.height;
+
+    // Page content height (what can actually be scrolled through)
+    const pageContentHeight = currentPage?.height || 1200;
+
+    // Viewport height (device screen size for mobile/tablet, or page height for desktop)
+    const viewportHeight = device.height;
+
+    // Canvas height: for desktop use page height, for devices use device height as viewport
+    const canvasHeight = deviceMode === 'desktop' ? pageContentHeight : viewportHeight;
 
     // Keyboard shortcuts
     useEffect(() => {
@@ -146,7 +161,7 @@ export default function Canvas() {
             const deltaY = (e.clientY - resizeStartY.current) / scale;
             const minHeight = currentPage.minHeight || 600;
             const newHeight = Math.max(minHeight, resizeStartHeight.current + deltaY);
-            setPageHeight(currentPage.id, newHeight);
+            setPageHeight(currentPage.id, Math.round(newHeight));
         };
 
         const handleMouseUp = () => {
@@ -188,6 +203,8 @@ export default function Canvas() {
 
         const elementData = JSON.parse(data);
 
+        if (!currentPage) return;
+
         // Adjust default width for device
         let defaultWidth = elementData.defaultWidth || 150;
         if (deviceMode !== 'desktop' && defaultWidth > canvasWidth - 40) {
@@ -196,6 +213,7 @@ export default function Canvas() {
 
         addElement({
             type: elementData.type,
+            pageId: currentPage.id,
             bounds: {
                 x: Math.max(0, Math.min(x, canvasWidth - defaultWidth)),
                 y: Math.max(0, y),
@@ -225,13 +243,14 @@ export default function Canvas() {
     const scaledHeight = totalHeight * effectiveScale;
 
     return (
-        <div className={styles.canvasContainer}>
+        <div className={`${styles.canvasContainer} ${deviceMode !== 'desktop' ? styles.deviceModeContainer : ''}`}>
             {/* Centered Content Wrapper */}
             <div style={{
-                margin: 'auto',
+                margin: '0 auto',
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'center'
+                alignItems: 'center',
+                flexShrink: 0
             }}>
                 {/* Device Label */}
                 <div className={styles.deviceLabel}>
@@ -242,11 +261,12 @@ export default function Canvas() {
                 {/* Scaled Frame Wrapper with extra padding for resize handle */}
                 <div style={{
                     width: scaledWidth,
-                    height: deviceMode === 'desktop' ? scaledHeight + 40 : scaledHeight, // Extra padding for resize handle
+                    height: scaledHeight + (deviceMode === 'desktop' ? 40 : 0),
                     position: 'relative',
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    marginBottom: 40 // Add some bottom breathing room
                 }}>
                     {/* Device Frame Wrapper */}
                     <div
@@ -285,7 +305,7 @@ export default function Canvas() {
                             </div>
                         )}
 
-                        {/* Actual Canvas */}
+                        {/* Actual Canvas - acts as scrollable viewport for mobile/tablet */}
                         <div
                             className={`${styles.canvas} ${isPreviewMode ? styles.previewMode : ''} ${deviceMode !== 'desktop' ? styles.deviceCanvas : ''}`}
                             ref={canvasRef}
@@ -300,10 +320,17 @@ export default function Canvas() {
                                 position: device.frame ? 'absolute' : 'relative',
                                 top: device.frame ? bezel : undefined,
                                 left: device.frame ? bezel : undefined,
+                                overflowY: deviceMode !== 'desktop' ? 'auto' : 'visible',
+                                overflowX: 'hidden',
                             }}
                         >
-                            {/* Inner content area */}
-                            <div className={styles.canvasInner}>
+                            {/* Inner content area - uses full page height for scrolling */}
+                            <div
+                                className={styles.canvasInner}
+                                style={{
+                                    minHeight: deviceMode !== 'desktop' ? pageContentHeight : '100%',
+                                }}
+                            >
                                 {/* Grid overlay */}
                                 {!isPreviewMode && <GridOverlay />}
 
@@ -337,11 +364,16 @@ export default function Canvas() {
                     </div>
 
                     {/* Page resize handle - OUTSIDE scaled wrapper for proper visibility */}
-                    {deviceMode === 'desktop' && !isPreviewMode && (
+                    {deviceMode === 'desktop' && !isPreviewMode && isMounted && (
                         <div
                             className={`${styles.pageResizeHandle} ${isResizingPage ? styles.resizing : ''}`}
                             onMouseDown={handleResizeStart}
-                            style={{ marginTop: '8px' }}
+                            style={{
+                                position: 'absolute',
+                                bottom: '-30px', // Position slightly below the visual content
+                                left: 0,
+                                zIndex: 10
+                            }}
                         >
                             <div className={styles.resizeHandleBar} />
                             <span className={styles.resizeHandleLabel}>

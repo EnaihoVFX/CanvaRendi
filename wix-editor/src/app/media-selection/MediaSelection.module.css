@@ -1,0 +1,314 @@
+.container {
+    font-family: var(--font-inter), sans-serif;
+    background-color: #f9fafb;
+    color: #111827;
+    height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 80px;
+    /* Space for fixed bottom bar */
+}
+
+/* --- Nav --- */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 40px;
+    background: rgba(249, 250, 251, 0.9);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(8px);
+}
+
+.brandWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.brandIcon {
+    font-size: 18px;
+    color: #059669;
+}
+
+.brandLogo {
+    font-family: var(--font-playfair), serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #111827;
+}
+
+.stepLabel {
+    font-size: 12px;
+    font-weight: 600;
+    color: #6b7280;
+}
+
+/* --- Header --- */
+.headerSection {
+    text-align: center;
+    padding: 40px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.headerTitle {
+    font-family: var(--font-playfair), serif;
+    font-size: 36px;
+    font-weight: 400;
+    margin-bottom: 12px;
+}
+
+.headerSub {
+    color: #6b7280;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* --- Masonry Grid --- */
+.masonryGrid {
+    column-count: 3;
+    column-gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px 100px;
+    /* Bottom padding for fixed footer */
+}
+
+.mediaCard {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    break-inside: avoid;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.mediaCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.1);
+}
+
+.mediaCard.selected {
+    border: 2px solid #059669;
+    /* ape-green */
+}
+
+.cardImage {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.cardContent {
+    padding: 16px;
+}
+
+/* --- Badges & Meta --- */
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.sourceBadge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.badgeAi {
+    background: #f3e8ff;
+    color: #7e22ce;
+}
+
+.badgeSocial {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+.badgeWeb {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.usageLabel {
+    font-size: 12px;
+    font-weight: 500;
+    color: #111827;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.usageDesc {
+    font-size: 11px;
+    color: #6b7280;
+    line-height: 1.4;
+}
+
+/* Checkbox Overlay */
+.checkOverlay {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 24px;
+    height: 24px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background 0.2s;
+}
+
+.mediaCard.selected .checkOverlay {
+    background: #059669;
+    color: white;
+}
+
+.mediaCard:not(.selected) .checkOverlay {
+    color: transparent;
+    border: 1px solid #ddd;
+}
+
+/* --- Bottom Bar --- */
+.bottomBar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    border-top: 1px solid #e5e7eb;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.selectionCount {
+    font-size: 14px;
+    font-weight: 500;
+    color: #6b7280;
+}
+
+.btnBuild {
+    background: #1f2937;
+    color: white;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s;
+}
+
+.btnBuild:hover {
+    background: #000;
+}
+
+/* Responsive Columns */
+@media (max-width: 900px) {
+    .masonryGrid {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 600px) {
+    .masonryGrid {
+        column-count: 1;
+    }
+
+    .bottomBar {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .btnBuild {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* --- Loading Simulation --- */
+.loadingOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-inter), sans-serif;
+}
+
+.loadingSpinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid #e5e7eb;
+    border-top: 3px solid #059669;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 24px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loadingText {
+    font-family: var(--font-playfair), serif;
+    font-size: 24px;
+    color: #111827;
+    margin-bottom: 12px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.loadingSub {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.progressBar {
+    width: 300px;
+    height: 4px;
+    background: #e5e7eb;
+    border-radius: 2px;
+    margin-top: 32px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    background: #059669;
+    transition: width 0.3s ease;
+}

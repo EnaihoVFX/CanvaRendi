@@ -1,0 +1,240 @@
+.container {
+    font-family: 'Inter', sans-serif;
+    background-color: #ffffff;
+    overflow: hidden;
+    touch-action: none;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #111827;
+}
+
+.fontSerifDisplay {
+    font-family: var(--font-playfair), serif;
+}
+
+/* Animations */
+.visualizerContainer {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    background: #059669;
+    opacity: 0.1;
+    transform: scale(0.5);
+}
+
+/* State: Listening (Pulse) */
+.listening .c1 {
+    animation: pulse 2s infinite ease-out;
+    width: 100%;
+    height: 100%;
+}
+
+.listening .c2 {
+    animation: pulse 2s infinite ease-out 0.6s;
+    width: 100%;
+    height: 100%;
+}
+
+/* State: Speaking (Wave) */
+.speaking .c1 {
+    animation: wave 1.5s infinite ease-in-out;
+    width: 80%;
+    height: 80%;
+    opacity: 0.15;
+}
+
+.speaking .c2 {
+    animation: wave 1.5s infinite ease-in-out 0.3s;
+    width: 70%;
+    height: 70%;
+    opacity: 0.25;
+}
+
+/* State: Loading (Spin) */
+.loadingState .avatarCore {
+    animation: spin 1s linear infinite;
+    background: transparent;
+    color: #059669;
+    border: 2px solid #059669;
+    box-shadow: none;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.5);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1.6);
+        opacity: 0;
+    }
+}
+
+@keyframes wave {
+
+    0%,
+    100% {
+        transform: scale(0.9);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.avatarCore {
+    width: 70px;
+    height: 70px;
+    background: #111;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    z-index: 10;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s;
+}
+
+.listening .avatarCore {
+    transform: scale(1.1);
+    background: #059669;
+}
+
+/* Bottom Sheet */
+.bottomSheet {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top-left-radius: 32px;
+    border-top-right-radius: 32px;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.15);
+    z-index: 40;
+    height: 65vh;
+    transform: translateY(110%);
+    transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.bottomSheet.active {
+    transform: translateY(0);
+}
+
+.sheetContent {
+    overflow-y: auto;
+    flex: 1;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Scrollbar hide */
+.sheetContent::-webkit-scrollbar {
+    display: none;
+}
+
+.sheetContent {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.slideUpText {
+    animation: slideUp 0.4s ease-out forwards;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Option Cards */
+.optionCard {
+    width: 100%;
+    text-align: left;
+    padding: 16px;
+    border-radius: 16px;
+    border: 2px solid #f3f4f6;
+    /* gray-100 */
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.2s;
+}
+
+.optionCard:active {
+    transform: scale(0.98);
+}
+
+.optionCard.selected {
+    border-color: #10b981;
+    /* emerald-500 */
+    background-color: #ecfdf5;
+    /* emerald-50 */
+}
+
+/* Social Inputs */
+.socialInputGroup {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: #f9fafb;
+    border-radius: 16px;
+    border: 1px solid #f3f4f6;
+}
+
+.micBtn {
+    width: 80px;
+    height: 80px;
+    background: black;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s;
+    border: 4px solid #f3f4f6;
+}
+
+.micBtn:active {
+    transform: scale(0.95);
+}
+
+.footerControls {
+    padding: 24px;
+    padding-bottom: 40px;
+    width: 100%;
+    z-index: 20;
+    background: linear-gradient(to top, white 50%, transparent);
+    transition: transform 0.3s;
+}

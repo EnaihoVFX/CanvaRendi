@@ -1,0 +1,301 @@
+.container {
+    padding: 24px;
+    padding-bottom: 100px;
+    /* Space for action bar */
+}
+
+.header {
+    margin-bottom: 32px;
+}
+
+.stepIndicator {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #9ca3af;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 12px;
+    line-height: 1.2;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+.siteGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.siteCard {
+    background: #f9fafb;
+    border: 2px solid #e5e7eb;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.siteCard.selected {
+    border-color: #2563eb;
+    background: #eff6ff;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.browserChrome {
+    height: 24px;
+    background: #e5e7eb;
+    border-bottom: 1px solid #d1d5db;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    gap: 6px;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.dot.r {
+    background: #ef4444;
+}
+
+.dot.y {
+    background: #f59e0b;
+}
+
+.dot.g {
+    background: #10b981;
+}
+
+.miniSite {
+    height: 160px;
+    background: white;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Layout: Editorial */
+.layoutEditorial .hero {
+    height: 60%;
+    border-bottom: 1px solid #f3f4f6;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.layoutEditorial .hLine {
+    width: 60%;
+    height: 8px;
+    background: #111827;
+    border-radius: 4px;
+}
+
+.layoutEditorial .subLine {
+    width: 40%;
+    height: 4px;
+    background: #9ca3af;
+    border-radius: 2px;
+}
+
+.layoutEditorial .grid {
+    height: 40%;
+    display: flex;
+}
+
+.layoutEditorial .img {
+    flex: 1;
+    border-right: 1px solid #f3f4f6;
+    background: #f9fafb;
+}
+
+.layoutEditorial .img:last-child {
+    border: none;
+}
+
+
+/* Layout: SaaS */
+.layoutSaas .nav {
+    height: 15%;
+    border-bottom: 1px solid #f3f4f6;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+}
+
+.layoutSaas .navLogo {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    background: #2563eb;
+}
+
+.layoutSaas .hero {
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: #eff6ff;
+}
+
+.layoutSaas .hLine {
+    width: 50%;
+    height: 6px;
+    background: #1e3a8a;
+    border-radius: 3px;
+}
+
+.layoutSaas .btn {
+    width: 30%;
+    height: 10px;
+    background: #2563eb;
+    border-radius: 5px;
+}
+
+.layoutSaas .logos {
+    height: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.layoutSaas .logoDot {
+    width: 16px;
+    height: 16px;
+    background: #dbeafe;
+    border-radius: 50%;
+}
+
+
+/* Layout: Split */
+.layoutSplit {
+    display: flex;
+    height: 100%;
+}
+
+.layoutSplit .left {
+    width: 50%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+}
+
+.layoutSplit .right {
+    width: 50%;
+    background: #f3f4f6;
+    position: relative;
+}
+
+.layoutSplit .hLine {
+    width: 80%;
+    height: 8px;
+    background: #111827;
+    border-radius: 4px;
+}
+
+.layoutSplit .pLine {
+    width: 100%;
+    height: 4px;
+    background: #9ca3af;
+    border-radius: 2px;
+}
+
+.layoutSplit .btn {
+    width: 40%;
+    height: 10px;
+    background: #111827;
+    border-radius: 5px;
+    margin-top: 4px;
+}
+
+.layoutSplit .floatingCard {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.layoutSplit .cardCircle {
+    width: 20px;
+    height: 20px;
+    background: #e5e7eb;
+    border-radius: 50%;
+    margin-bottom: 4px;
+}
+
+.layoutSplit .cardLine {
+    width: 100%;
+    height: 3px;
+    background: #e5e7eb;
+    border-radius: 1.5px;
+}
+
+
+.actionBar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px 24px;
+    background: white;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 50;
+}
+
+.btnBack {
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #4b5563;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.btnNext {
+    padding: 12px 24px;
+    background: #111827;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}

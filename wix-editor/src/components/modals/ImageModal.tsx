@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { UploadIcon } from '../icons/Icons';
 import styles from './ImageModal.module.css';
 
 interface ImageModalProps {
@@ -99,7 +100,7 @@ export default function ImageModal({ isOpen, onClose, onSubmit, currentSrc, curr
                     {activeTab === 'upload' && (
                         <div className={styles.uploadSection}>
                             <div className={styles.dropZone}>
-                                <span className={styles.uploadIcon}>📁</span>
+                                <span className={styles.uploadIcon}><UploadIcon /></span>
                                 <p>Drag image here or click to upload</p>
                                 <span className={styles.uploadHint}>PNG, JPG, GIF up to 10MB</span>
                             </div>

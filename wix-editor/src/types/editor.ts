@@ -56,7 +56,14 @@ export type ElementType =
   | 'quote'
   // Contact
   | 'contact-form'
-  | 'subscribe-form';
+  | 'subscribe-form'
+  // Advanced
+  | 'testimonial'
+  | 'team-member'
+  | 'progress-bar'
+  | 'countdown'
+  | 'alert'
+  | 'badge';
 
 // ===== Element Position & Size =====
 export interface ElementBounds {
@@ -178,7 +185,75 @@ export type ElementProps =
   | { type: 'button'; props: ButtonElementProps }
   | { type: 'section'; props: SectionElementProps }
   | { type: 'box'; props: BoxElementProps }
-  | { type: 'shape'; props: ShapeElementProps };
+  | { type: 'shape'; props: ShapeElementProps }
+  | { type: 'testimonial'; props: TestimonialElementProps }
+  | { type: 'team-member'; props: TeamMemberElementProps }
+  | { type: 'progress-bar'; props: ProgressBarElementProps }
+  | { type: 'countdown'; props: CountdownElementProps }
+  | { type: 'alert'; props: AlertElementProps }
+  | { type: 'badge'; props: BadgeElementProps };
+
+// ===== Testimonial Props =====
+export interface TestimonialElementProps {
+  quote: string;
+  author: string;
+  role?: string;
+  avatar?: string;
+  rating?: number;
+}
+
+// ===== Team Member Props =====
+export interface TeamMemberElementProps {
+  name: string;
+  role: string;
+  image?: string;
+  bio?: string;
+  socialLinks?: {
+    linkedin?: string;
+    twitter?: string;
+    email?: string;
+  };
+}
+
+// ===== Progress Bar Props =====
+export interface ProgressBarElementProps {
+  value: number;
+  max: number;
+  showLabel: boolean;
+  color: string;
+  height: number;
+}
+
+// ===== Countdown Props =====
+export interface CountdownElementProps {
+  targetDate: string; // ISO string
+  style: 'simple' | 'blocks' | 'circles';
+}
+
+// ===== Alert Props =====
+export interface AlertElementProps {
+  type: 'info' | 'success' | 'warning' | 'error';
+  title: string;
+  message: string;
+  closable: boolean;
+}
+
+// ===== Badge Props =====
+export interface BadgeElementProps {
+  label: string;
+  color: string; // background color
+  textColor: string;
+  radius: number;
+}
+
+
+// ===== Animation Properties =====
+export interface ElementAnimation {
+  type: 'fade-in' | 'slide-up' | 'slide-down' | 'slide-left' | 'slide-right' | 'scale-up' | 'rotate-in' | 'bounce-in' | 'none';
+  duration: number; // in seconds
+  delay: number; // in seconds
+  ease: 'ease' | 'linear' | 'ease-in' | 'ease-out' | 'ease-in-out';
+}
 
 // ===== Canvas Element =====
 export interface CanvasElement {
@@ -191,6 +266,7 @@ export interface CanvasElement {
   parentId?: string;
   zIndex: number;
   pageId: string; // Associates element with a specific page
+  animation?: ElementAnimation;
 }
 
 // ===== Section =====
@@ -212,6 +288,7 @@ export interface Page {
   isHomePage: boolean;
   minHeight: number; // Minimum page height
   height: number; // Current page height (user-adjustable)
+  elements?: CanvasElement[]; // Elements belonging to this page
 }
 
 // ===== Site Theme =====
@@ -281,4 +358,22 @@ export interface ToolbarAction {
   icon: string;
   label: string;
   onClick: () => void;
+}
+// ===== Site Types =====
+export interface SiteData {
+  siteId: string;
+  name?: string;
+  lastSaved: string;
+  lastPublished?: string;
+  pages: Page[];
+  elements: Record<string, CanvasElement>;
+  theme: SiteTheme;
+}
+
+export interface PublishedSite {
+  siteId: string;
+  publishedAt: string;
+  pages: Page[];
+  elements: Record<string, CanvasElement>;
+  theme: SiteTheme;
 }

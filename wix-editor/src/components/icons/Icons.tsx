@@ -367,6 +367,44 @@ export const TikTokIcon = () => (
     </svg>
 );
 
+// ===== TEXT ALIGNMENT ICONS =====
+export const AlignLeftIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <line x1="17" y1="10" x2="3" y2="10" />
+        <line x1="21" y1="6" x2="3" y2="6" />
+        <line x1="21" y1="14" x2="3" y2="14" />
+        <line x1="17" y1="18" x2="3" y2="18" />
+    </svg>
+);
+
+export const AlignCenterIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <line x1="18" y1="10" x2="6" y2="10" />
+        <line x1="21" y1="6" x2="3" y2="6" />
+        <line x1="21" y1="14" x2="3" y2="14" />
+        <line x1="18" y1="18" x2="6" y2="18" />
+    </svg>
+);
+
+export const AlignRightIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <line x1="21" y1="10" x2="7" y2="10" />
+        <line x1="21" y1="6" x2="3" y2="6" />
+        <line x1="21" y1="14" x2="3" y2="14" />
+        <line x1="21" y1="18" x2="7" y2="18" />
+    </svg>
+);
+
+export const AlignJustifyIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <line x1="21" y1="10" x2="3" y2="10" />
+        <line x1="21" y1="6" x2="3" y2="6" />
+        <line x1="21" y1="14" x2="3" y2="14" />
+        <line x1="21" y1="18" x2="3" y2="18" />
+    </svg>
+);
+
+
 // ===== UI ICONS =====
 export const PlayIcon = () => (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -484,11 +522,75 @@ export const EyeOffIcon = () => (
     </svg>
 );
 
+export const HomeIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        <polyline points="9 22 9 12 15 12 15 22" />
+    </svg>
+);
+
+export const PageIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+    </svg>
+);
+
 export const LayersIcon = () => (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <polygon points="12 2 2 7 12 12 22 7 12 2" />
         <polyline points="2 17 12 22 22 17" />
         <polyline points="2 12 12 17 22 12" />
+    </svg>
+);
+
+export const AnimationIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M2 12h2" />
+        <path d="M20 12h2" />
+        <path d="M12 2v2" />
+        <path d="M12 20v2" />
+        <path d="M5.6 5.6l1.4 1.4" />
+        <path d="M18.4 18.4l-1.4-1.4" />
+        <path d="M5.6 18.4l1.4-1.4" />
+        <path d="M18.4 5.6l-1.4 1.4" />
+    </svg>
+);
+
+// ===== NEW ICONS =====
+export const UserIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+    </svg>
+);
+
+export const ProgressBarIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <rect x="2" y="10" width="20" height="4" rx="1" />
+        <line x1="2" y1="12" x2="14" y2="12" />
+    </svg>
+);
+
+export const TimerIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
+    </svg>
+);
+
+export const AlertIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+        <line x1="12" y1="9" x2="12" y2="13" />
+        <line x1="12" y1="17" x2="12.01" y2="17" />
+    </svg>
+);
+
+export const TagIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+        <line x1="7" y1="7" x2="7.01" y2="7" />
     </svg>
 );
 
@@ -539,6 +641,12 @@ export const ElementIcons: Record<string, React.FC> = {
     'cart-button': CartIcon,
     'blog-card': BlogIcon,
     quote: QuoteIcon,
+    testimonial: QuoteIcon, // Reuse QuoteIcon for now or add specific one
+    'team-member': UserIcon,
+    'progress-bar': ProgressBarIcon,
+    countdown: TimerIcon,
+    alert: AlertIcon,
+    badge: TagIcon,
 };
 
 export const SocialIcons: Record<string, React.FC> = {
@@ -575,4 +683,10 @@ export const GenericIcons: Record<string, React.FC> = {
     eye: EyeIcon,
     'eye-off': EyeOffIcon,
     layers: LayersIcon,
+    animation: AnimationIcon,
+    user: UserIcon,
+    'progress-bar': ProgressBarIcon,
+    timer: TimerIcon,
+    alert: AlertIcon,
+    tag: TagIcon,
 };

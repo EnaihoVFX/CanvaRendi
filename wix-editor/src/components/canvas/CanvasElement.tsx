@@ -6,6 +6,7 @@ import { CanvasElement as CanvasElementType } from '@/types/editor';
 import ElementToolbar from '../panels/ElementToolbar';
 import * as Icons from '@/components/icons/Icons';
 import styles from './CanvasElement.module.css';
+import DOMPurify from 'isomorphic-dompurify';
 
 interface CanvasElementProps {
     element: CanvasElementType;
@@ -306,22 +307,57 @@ export default function CanvasElement({ element, isSelected, isPreview, onContex
                 );
 
             // ===== VIDEO =====
+            // ===== VIDEO =====
             case 'video':
+                // Helper to get embed URL
+                const getVideoSrc = (url: string) => {
+                    if (!url) return '';
+                    // YouTube
+                    if (url.includes('youtube.com/watch?v=') || url.includes('youtu.be/')) {
+                        const id = url.includes('youtu.be/')
+                            ? url.split('youtu.be/')[1].split('?')[0]
+                            : url.split('v=')[1].split('&')[0];
+                        return `https://www.youtube.com/embed/${id}?autoplay=${props.autoPlay ? 1 : 0}&mute=${props.muted ? 1 : 0}&controls=${props.controls ? 1 : 0}&loop=${props.loop ? 1 : 0}`;
+                    }
+                    // Vimeo
+                    if (url.includes('vimeo.com/')) {
+                        const id = url.split('vimeo.com/')[1].split('?')[0];
+                        return `https://player.vimeo.com/video/${id}?autoplay=${props.autoPlay ? 1 : 0}&muted=${props.muted ? 1 : 0}&loop=${props.loop ? 1 : 0}`;
+                    }
+                    return url;
+                };
+
+                const videoSrc = getVideoSrc(props.src as string);
+                const isIframe = videoSrc.includes('youtube') || videoSrc.includes('vimeo');
+
                 return (
                     <div className={styles.videoContent}>
-                        {props.src ? (
-                            <video
-                                src={props.src}
-                                poster={props.poster}
-                                autoPlay={props.autoPlay}
-                                loop={props.loop}
-                                muted={props.muted}
-                                controls={props.controls}
-                            />
+                        {videoSrc ? (
+                            isIframe ? (
+                                <iframe
+                                    src={videoSrc}
+                                    width="100%"
+                                    height="100%"
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                    style={{ pointerEvents: isPreview ? 'auto' : 'none' }}
+                                />
+                            ) : (
+                                <video
+                                    src={videoSrc}
+                                    poster={props.poster as string}
+                                    autoPlay={props.autoPlay as boolean}
+                                    loop={props.loop as boolean}
+                                    muted={props.muted as boolean}
+                                    controls={props.controls as boolean}
+                                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                />
+                            )
                         ) : (
                             <div className={styles.videoPlaceholder}>
                                 <Icons.PlayIcon />
-                                <span>Video</span>
+                                <span>Add Video URL</span>
                             </div>
                         )}
                     </div>
@@ -330,65 +366,144 @@ export default function CanvasElement({ element, isSelected, isPreview, onContex
             // ===== GALLERY =====
             case 'gallery':
             case 'slideshow':
+                const images = (props.images as string[]) || [];
+                const cols = (props.columns as number) || 3;
+                const gap = (props.gap as number) || 8;
+
                 return (
                     <div className={styles.galleryContent}>
-                        <div className={styles.galleryGrid}>
-                            {[1, 2, 3, 4, 5, 6].map((i) => (
-                                <div key={i} className={styles.galleryItem}>
-                                    <Icons.ImageIcon />
+                        {images.length > 0 ? (
+                            <div
+                                className={styles.galleryGrid}
+                                style={{
+                                    gridTemplateColumns: `repeat(${cols}, 1fr)`,
+                                    gap: `${gap}px`
+                                }}
+                            >
+                                {images.map((src, i) => (
+                                    <div key={i} className={styles.galleryItem}>
+                                        <img
+                                            src={src}
+                                            alt={`Gallery item ${i}`}
+                                            draggable={false}
+                                            style={{
+                                                width: '100%',
+                                                height: '100%',
+                                                objectFit: 'cover',
+                                                pointerEvents: 'none'
+                                            }}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <>
+                                <div className={styles.galleryGrid} style={{ gridTemplateColumns: `repeat(${cols}, 1fr)`, gap: `${gap}px` }}>
+                                    {[1, 2, 3, 4, 5, 6].slice(0, cols * 2).map((i) => (
+                                        <div key={i} className={styles.galleryItem}>
+                                            <div className={styles.imagePlaceholder}>
+                                                <Icons.ImageIcon />
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
-                        </div>
-                        <span className={styles.galleryLabel}>Gallery ({props.columns || 3} columns)</span>
+                                <span className={styles.galleryLabel}>Gallery ({cols} columns)</span>
+                            </>
+                        )}
                     </div>
                 );
 
             // ===== NAVBAR =====
+            // ===== NAVBAR =====
             case 'navbar':
+                const navItems = Array.isArray(props.items) ? props.items : ['Home', 'About', 'Services', 'Contact'];
                 return (
                     <div className={styles.navbarContent}>
-                        <div className={styles.navLogo}>Logo</div>
+                        <div className={styles.navLogo}>{props.logo || 'Logo'}</div>
                         <div className={styles.navItems}>
-                            {(props.items || ['Home', 'About', 'Services', 'Contact']).map((item: string, i: number) => (
-                                <span key={i} className={styles.navItem}>{item}</span>
-                            ))}
+                            {navItems.map((item: any, i: number) => {
+                                const label = typeof item === 'string' ? item : item.label;
+                                const url = typeof item === 'string' ? '' : item.url;
+                                return (
+                                    <a
+                                        key={i}
+                                        className={styles.navItem}
+                                        href={isPreview && url ? url : undefined}
+                                        onClick={(e) => !isPreview && e.preventDefault()}
+                                        style={{ textDecoration: 'none' }}
+                                    >
+                                        {label}
+                                    </a>
+                                );
+                            })}
                         </div>
                         <div className={styles.navActions}>
-                            <button className={styles.navBtn}>Get Started</button>
+                            <button className={styles.navBtn}>{props.ctaText || 'Get Started'}</button>
                         </div>
                     </div>
                 );
 
             // ===== MENU =====
             case 'menu':
+                const menuItems = Array.isArray(props.items) ? props.items : ['Home', 'About', 'Services', 'Contact'];
                 return (
-                    <div className={styles.menuContent}>
-                        {(props.items || ['Home', 'About', 'Services', 'Contact']).map((item: string, i: number) => (
-                            <div key={i} className={styles.menuItem}>{item}</div>
-                        ))}
+                    <div className={`${styles.menuContent} ${props.style === 'horizontal' ? styles.menuHorizontal : ''}`}>
+                        {menuItems.map((item: any, i: number) => {
+                            const label = typeof item === 'string' ? item : item.label;
+                            const url = typeof item === 'string' ? '' : item.url;
+                            return (
+                                <a
+                                    key={i}
+                                    className={styles.menuItem}
+                                    href={isPreview && url ? url : undefined}
+                                    onClick={(e) => !isPreview && e.preventDefault()}
+                                    style={{
+                                        display: props.style === 'horizontal' ? 'inline-block' : 'block',
+                                        textDecoration: 'none'
+                                    }}
+                                >
+                                    {label}
+                                </a>
+                            );
+                        })}
                     </div>
                 );
 
             // ===== FOOTER =====
             case 'footer':
+                const footerCols = Array.isArray(props.columns) ? props.columns : [
+                    { title: 'Company', links: ['About Us', 'Careers'] },
+                    { title: 'Support', links: ['Help Center', 'Contact'] },
+                    { title: 'Legal', links: ['Privacy', 'Terms'] }
+                ];
+
                 return (
                     <div className={styles.footerContent}>
                         <div className={styles.footerColumns}>
-                            <div className={styles.footerCol}>
-                                <strong>Company</strong>
-                                <span>About Us</span>
-                                <span>Careers</span>
-                            </div>
-                            <div className={styles.footerCol}>
-                                <strong>Support</strong>
-                                <span>Help Center</span>
-                                <span>Contact</span>
-                            </div>
-                            <div className={styles.footerCol}>
-                                <strong>Legal</strong>
-                                <span>Privacy</span>
-                                <span>Terms</span>
-                            </div>
+                            {footerCols.map((col, i) => (
+                                <div key={i} className={styles.footerCol}>
+                                    <strong>{col.title}</strong>
+                                    {/* Handle both string links and object links */}
+                                    {col.links && col.links.map((link: any, j: number) => {
+                                        const label = typeof link === 'string' ? link : link.label;
+                                        const url = typeof link === 'string' ? '' : link.url;
+                                        return (
+                                            <a
+                                                key={j}
+                                                href={isPreview && url ? url : undefined}
+                                                style={{
+                                                    cursor: isPreview && url ? 'pointer' : 'default',
+                                                    textDecoration: 'none',
+                                                    color: 'inherit',
+                                                    display: 'block'
+                                                }}
+                                            >
+                                                {label}
+                                            </a>
+                                        );
+                                    })}
+                                </div>
+                            ))}
                             <div className={styles.footerCol}>
                                 <strong>Follow Us</strong>
                                 <div className={styles.footerSocial}>
@@ -398,7 +513,7 @@ export default function CanvasElement({ element, isSelected, isPreview, onContex
                                 </div>
                             </div>
                         </div>
-                        <div className={styles.footerBottom}>© 2024 Your Company. All rights reserved.</div>
+                        <div className={styles.footerBottom}>{props.copyright || '© 2024 Your Company. All rights reserved.'}</div>
                     </div>
                 );
 
@@ -406,9 +521,10 @@ export default function CanvasElement({ element, isSelected, isPreview, onContex
             case 'contact-form':
                 return (
                     <div className={styles.formContent}>
-                        <input placeholder="Your Name" className={styles.formInput} />
-                        <input placeholder="Email Address" className={styles.formInput} />
-                        <textarea placeholder="Your Message" className={styles.formTextarea} rows={4} />
+                        {props.showName !== false && <input placeholder="Your Name" className={styles.formInput} />}
+                        {props.showEmail !== false && <input placeholder="Email Address" className={styles.formInput} />}
+                        {props.showPhone && <input placeholder="Phone Number" className={styles.formInput} />}
+                        {props.showMessage !== false && <textarea placeholder="Your Message" className={styles.formTextarea} rows={4} />}
                         <button className={styles.formSubmit}>{props.submitLabel || 'Send Message'}</button>
                     </div>
                 );
@@ -444,7 +560,7 @@ export default function CanvasElement({ element, isSelected, isPreview, onContex
             case 'checkbox':
                 return (
                     <label className={styles.checkboxContent}>
-                        <input type="checkbox" />
+                        <input type="checkbox" defaultChecked={props.defaultChecked} />
                         <span className={styles.checkMark}><Icons.CheckIcon /></span>
                         <span>{props.label || 'Checkbox'}</span>
                     </label>
@@ -456,10 +572,31 @@ export default function CanvasElement({ element, isSelected, isPreview, onContex
                     <div className={styles.socialIconsContent}>
                         {(props.icons || ['facebook', 'instagram', 'twitter', 'linkedin']).map((iconName: string, i: number) => {
                             const IconComp = SocialIconComponents[iconName] || Icons.SocialIcon;
-                            return (
-                                <div key={i} className={styles.socialIcon} style={{ color: props.color || '#333' }}>
-                                    <IconComp />
+                            const url = props.links?.[iconName];
+
+                            const IconWrapper = ({ children }: { children: React.ReactNode }) => (
+                                <div className={styles.socialIcon} style={{ color: props.color || '#333' }}>
+                                    {children}
                                 </div>
+                            );
+
+                            if (url) {
+                                return (
+                                    <a
+                                        key={i}
+                                        href={isPreview ? url : undefined}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        style={{ textDecoration: 'none', color: 'inherit' }}
+                                        onClick={(e) => !isPreview && e.preventDefault()}
+                                    >
+                                        <IconWrapper><IconComp /></IconWrapper>
+                                    </a>
+                                );
+                            }
+
+                            return (
+                                <IconWrapper key={i}><IconComp /></IconWrapper>
                             );
                         })}
                     </div>
@@ -590,21 +727,63 @@ export default function CanvasElement({ element, isSelected, isPreview, onContex
             case 'map':
                 return (
                     <div className={styles.mapContent}>
-                        <div className={styles.mapPlaceholder}>
-                            <Icons.MapIcon />
-                            <span>{props.location || 'Google Map'}</span>
-                        </div>
+                        {props.location ? (
+                            <iframe
+                                width="100%"
+                                height="100%"
+                                frameBorder="0"
+                                style={{ border: 0, pointerEvents: isPreview ? 'auto' : 'none' }}
+                                src={`https://maps.google.com/maps?q=${encodeURIComponent(props.location as string)}&t=&z=${props.zoom || 14}&ie=UTF8&iwloc=&output=embed`}
+                                allowFullScreen
+                            ></iframe>
+                        ) : (
+                            <div className={styles.mapPlaceholder}>
+                                <Icons.MapIcon />
+                                <span>Enter specific location to see map</span>
+                            </div>
+                        )}
                     </div>
                 );
 
             // ===== EMBED =====
             case 'html':
+                return (
+                    <div className={styles.embedContent}>
+                        {props.code ? (
+                            <div
+                                className={styles.htmlContainer}
+                                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.code as string) }}
+                                style={{ pointerEvents: isPreview ? 'auto' : 'none' }}
+                            />
+                        ) : (
+                            <div className={styles.embedPlaceholder}>
+                                <Icons.EmbedIcon />
+                                <span>HTML Embed</span>
+                                <span className={styles.embedHint}>Enter your HTML code</span>
+                            </div>
+                        )}
+                    </div>
+                );
+
             case 'embed':
                 return (
                     <div className={styles.embedContent}>
-                        <Icons.EmbedIcon />
-                        <span>HTML/Embed</span>
-                        <span className={styles.embedHint}>Paste your code here</span>
+                        {props.src ? (
+                            <iframe
+                                src={props.src as string}
+                                width="100%"
+                                height="100%"
+                                frameBorder="0"
+                                style={{ pointerEvents: isPreview ? 'auto' : 'none' }}
+                                title="Embedded Content"
+                            />
+                        ) : (
+                            <div className={styles.embedPlaceholder}>
+                                <Icons.EmbedIcon />
+                                <span>iFrame Embed</span>
+                                <span className={styles.embedHint}>Enter URL to embed</span>
+                            </div>
+                        )}
                     </div>
                 );
 
@@ -667,10 +846,195 @@ export default function CanvasElement({ element, isSelected, isPreview, onContex
                     </div>
                 );
 
+            // ===== TESTIMONIAL =====
+            case 'testimonial':
+                return (
+                    <div className={styles.testimonialContent}>
+                        <div className={styles.testimonialQuote}>
+                            <Icons.QuoteIcon />
+                            <p>"{props.quote || 'Add a testimonial quote here...'}"</p>
+                        </div>
+                        <div className={styles.testimonialAuthor}>
+                            {props.avatar ? (
+                                <img src={props.avatar as string} alt={props.author as string} className={styles.testimonialAvatar} />
+                            ) : (
+                                <div className={styles.testimonialAvatarPlaceholder}>
+                                    <Icons.UserIcon />
+                                </div>
+                            )}
+                            <div className={styles.testimonialInfo}>
+                                <strong>{props.author || 'Author Name'}</strong>
+                                <span>{props.role || 'Role, Company'}</span>
+                            </div>
+                        </div>
+                    </div>
+                );
+
+            // ===== TEAM MEMBER =====
+            case 'team-member':
+                return (
+                    <div className={styles.teamMemberContent}>
+                        <div className={styles.teamMemberImage}>
+                            {props.image ? (
+                                <img src={props.image as string} alt={props.name as string} />
+                            ) : (
+                                <div className={styles.teamMemberPlaceholder}>
+                                    <Icons.UserIcon />
+                                </div>
+                            )}
+                        </div>
+                        <div className={styles.teamMemberInfo}>
+                            <h3>{props.name || 'Team Member'}</h3>
+                            <span className={styles.teamMemberRole}>{props.role || 'Job Title'}</span>
+                            <p>{props.bio || 'Short blography about the team member goes here.'}</p>
+                            <div className={styles.teamMemberSocial}>
+                                <Icons.LinkedInIcon />
+                                <Icons.TwitterIcon />
+                                <Icons.EmailIcon />
+                            </div>
+                        </div>
+                    </div>
+                );
+
+            // ===== PROGRESS BAR =====
+            case 'progress-bar':
+                const progress = Math.min(100, Math.max(0, (props.value as number || 50) / (props.max as number || 100) * 100));
+                return (
+                    <div className={styles.progressBarContent}>
+                        {props.showLabel !== false && (
+                            <div className={styles.progressBarLabel}>
+                                <span>Progress</span>
+                                <span>{Math.round(progress)}%</span>
+                            </div>
+                        )}
+                        <div
+                            className={styles.progressBarTrack}
+                            style={{ height: props.height || 8 }}
+                        >
+                            <div
+                                className={styles.progressBarFill}
+                                style={{
+                                    width: `${progress}%`,
+                                    backgroundColor: props.color || theme.colors.primary
+                                }}
+                            />
+                        </div>
+                    </div>
+                );
+
+            // ===== COUNTDOWN =====
+            case 'countdown':
+                return (
+                    <div className={`${styles.countdownContent} ${props.style === 'circles' ? styles.countdownCircles : ''} ${props.style === 'blocks' ? styles.countdownBlocks : ''}`}>
+                        {['Days', 'Hours', 'Minutes', 'Seconds'].map((unit, i) => (
+                            <div key={unit} className={styles.countdownItem}>
+                                <div className={styles.countdownValue}>
+                                    {['02', '14', '35', '42'][i]}
+                                </div>
+                                <div className={styles.countdownLabel}>{unit}</div>
+                            </div>
+                        ))}
+                    </div>
+                );
+
+            // ===== ALERT =====
+            case 'alert':
+                const alertColors: Record<string, string> = {
+                    info: '#3b82f6',
+                    success: '#10b981',
+                    warning: '#f59e0b',
+                    error: '#ef4444'
+                };
+                const alertBg: Record<string, string> = {
+                    info: '#eff6ff',
+                    success: '#ecfdf5',
+                    warning: '#fffbeb',
+                    error: '#fef2f2'
+                };
+                const type = (props.type as string) || 'info';
+
+                return (
+                    <div
+                        className={styles.alertContent}
+                        style={{
+                            backgroundColor: alertBg[type],
+                            borderColor: alertColors[type]
+                        }}
+                    >
+                        <div className={styles.alertIcon} style={{ color: alertColors[type] }}>
+                            <Icons.AlertIcon />
+                        </div>
+                        <div className={styles.alertText}>
+                            <strong>{props.title || 'Attention'}</strong>
+                            <p>{props.message || 'This is an alert message.'}</p>
+                        </div>
+                        {props.closable && (
+                            <div className={styles.alertClose}>
+                                <Icons.CloseIcon />
+                            </div>
+                        )}
+                    </div>
+                );
+
+            // ===== BADGE =====
+            case 'badge':
+                return (
+                    <div
+                        className={styles.badgeContent}
+                        style={{
+                            backgroundColor: props.color || theme.colors.primary,
+                            color: props.textColor || 'white',
+                            borderRadius: props.radius || 4
+                        }}
+                    >
+                        <Icons.TagIcon />
+                        <span>{props.label || 'New'}</span>
+                    </div>
+                );
+
             default:
                 return <div className={styles.defaultContent}>{element.type}</div>;
         }
     };
+
+    // Entrance Animation Logic
+    const [isVisible, setIsVisible] = useState(false);
+    const hasAnimation = !!element.animation && element.animation.type !== 'none';
+
+    useEffect(() => {
+        if (!hasAnimation || !elementRef.current) {
+            setIsVisible(true);
+            return;
+        }
+
+        // Reset visibility when animation changes to replay it in editor
+        setIsVisible(false);
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect();
+                }
+            });
+        }, { threshold: 0.1 });
+
+        observer.observe(elementRef.current);
+
+        return () => observer.disconnect();
+    }, [hasAnimation, element.animation?.type, element.animation?.duration, element.animation?.delay]);
+
+    // Construct animation style
+    const animationStyle: React.CSSProperties = hasAnimation ? {
+        animationDuration: `${element.animation!.duration}s`,
+        animationDelay: `${element.animation!.delay}s`,
+        animationTimingFunction: element.animation!.ease,
+        animationFillMode: 'both',
+    } : {};
+
+    const animationClass = hasAnimation && isVisible
+        ? styles[`animate-${element.animation!.type}`]
+        : '';
 
     if (element.hidden && !isPreview) {
         return null;
@@ -687,6 +1051,8 @@ export default function CanvasElement({ element, isSelected, isPreview, onContex
                     ${isDragging ? styles.dragging : ''}
                     ${isPreview ? styles.preview : ''}
                     ${element.locked ? styles.locked : ''}
+                    ${hasAnimation && !isVisible ? styles.hasAnimation : ''}
+                    ${animationClass}
                 `}
                 style={{
                     left: element.bounds.x,
@@ -695,7 +1061,8 @@ export default function CanvasElement({ element, isSelected, isPreview, onContex
                     height: element.bounds.height,
                     zIndex: element.zIndex,
                     transform: element.bounds.rotation ? `rotate(${element.bounds.rotation}deg)` : undefined,
-                    opacity: element.hidden ? 0.5 : 1,
+                    opacity: element.hidden ? 0.5 : (hasAnimation && !isVisible ? 0 : 1),
+                    ...animationStyle
                 }}
                 onClick={handleClick}
                 onDoubleClick={handleDoubleClick}

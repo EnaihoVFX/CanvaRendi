@@ -2,6 +2,8 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { v4 as uuidv4 } from 'uuid';
 import { CanvasElement, Page, SiteTheme, PanelId } from '@/types/editor';
+import { beanAndBrewPages, beanAndBrewElements, beanAndBrewTheme } from '@/data/seedData';
+import { mobileBeanPages, mobileBeanElements } from '@/data/mobileSeedData';
 
 interface HistoryState {
     elements: Record<string, CanvasElement>;
@@ -10,6 +12,7 @@ interface HistoryState {
 
 interface EditorStore {
     // Data
+    siteId: string | null;
     pages: Page[];
     elements: Record<string, CanvasElement>;
     currentPageId: string;
@@ -21,6 +24,7 @@ interface EditorStore {
     activePanelId: PanelId | null;
     isPreviewMode: boolean;
     deviceMode: 'desktop' | 'tablet' | 'mobile';
+    layoutMode: 'desktop' | 'mobile'; // New: Tracks which seed data set is active
     zoom: number;
     isDragging: boolean;
 
@@ -48,6 +52,12 @@ interface EditorStore {
     setDeviceMode: (mode: 'desktop' | 'tablet' | 'mobile') => void;
     setZoom: (zoom: number) => void;
     setDragging: (isDragging: boolean) => void;
+    setSiteId: (siteId: string) => void;
+    setInitialData: (data: { pages: Page[], elements: Record<string, CanvasElement>, theme: SiteTheme }) => void;
+
+    // Layout Actions
+    resetToMobileSeed: () => void;
+    resetToDesktopSeed: () => void;
 
     updateTheme: (updates: Partial<SiteTheme>) => void;
     setThemeColor: (key: keyof SiteTheme['colors'], value: string) => void;
@@ -70,63 +80,120 @@ interface EditorStore {
     setPageHeight: (pageId: string, height: number) => void;
     expandPageHeightIfNeeded: (elementBottomY: number) => void;
 
+    // Persistence
+    isSaving: boolean;
+    isPublishing: boolean;
+    saveSite: () => Promise<void>;
+    publishSite: () => Promise<string | null>;
+
     // Helpers
     getSelectedElement: () => CanvasElement | null;
     getCurrentPage: () => Page | null;
     getElementsForCurrentPage: () => CanvasElement[];
 }
 
-// Default theme
-const defaultTheme: SiteTheme = {
-    colors: {
-        primary: '#116DFF',
-        secondary: '#20303C',
-        accent: '#FF6B6B',
-        background: '#FFFFFF',
-        text: '#20303C',
-    },
-    fonts: {
-        heading: 'DM Sans',
-        body: 'DM Sans',
-    },
-};
-
-// Default page
-const defaultPage: Page = {
-    id: 'home',
-    name: 'Home',
-    slug: '/',
-    sections: [
-        {
-            id: 'hero',
-            name: 'Hero Section',
-            height: 600,
-            backgroundColor: '#FFFFFF',
-            elements: [],
-        },
-    ],
-    isHomePage: true,
-    minHeight: 600,
-    height: 1200,
-};
-
 export const useEditorStore = create<EditorStore>()(
     persist(
         (set, get) => ({
-            // Initial State
-            pages: [defaultPage],
-            elements: {},
+            // Initial State - seeded with Bean & Brew data
+            siteId: null,
+            pages: beanAndBrewPages,
+            elements: beanAndBrewElements,
             currentPageId: 'home',
-            theme: defaultTheme,
+            theme: beanAndBrewTheme,
             selectedElementId: null,
             hoveredElementId: null,
             activePanelId: null,
             isPreviewMode: false,
             deviceMode: 'desktop',
+            layoutMode: 'desktop',
             zoom: 100,
             isDragging: false,
             history: [],
             historyIndex: -1,
+            isSaving: false,
+            isPublishing: false,
+
+            // Layout Actions
+            resetToMobileSeed: () => {
+                set({
+                    pages: mobileBeanPages,
+                    elements: mobileBeanElements,
+                    layoutMode: 'mobile',
+                    currentPageId: 'home',
+                    selectedElementId: null,
+                    history: [],
+                    historyIndex: -1,
+                });
+            },
+
+            resetToDesktopSeed: () => {
+                set({
+                    pages: beanAndBrewPages,
+                    elements: beanAndBrewElements,
+                    layoutMode: 'desktop',
+                    currentPageId: 'home',
+                    selectedElementId: null,
+                    history: [],
+                    historyIndex: -1,
+                });
+            },
+
+            // Persistence Actions
+            saveSite: async () => {
+                const { pages, elements, theme, siteId } = get();
+                if (!siteId) return; // Guard against no siteId
+
+                set({ isSaving: true });
+                try {
+                    // Embed elements back into their respective pages for the storage layer
+                    const pagesWithElements = pages.map(page => ({
+                        ...page,
+                        elements: Object.values(elements).filter(el => el.pageId === page.id),
+                    }));
+
+                    const response = await fetch('/api/save', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ siteId, pages: pagesWithElements, theme }),
+                    });
+
+                    if (!response.ok) throw new Error('Failed to save');
+
+                    // Optional: Show toast or feedback here if not handled by UI components
+                } catch (error) {
+                    console.error('Save failed:', error);
+                } finally {
+                    set({ isSaving: false });
+                }
+            },
+
+            publishSite: async () => {
+                const { siteId } = get();
+                if (!siteId) return null;
+
+                set({ isPublishing: true });
+                try {
+                    // First save the current state
+                    await get().saveSite();
+
+                    const response = await fetch('/api/publish', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ siteId }),
+                    });
+
+                    if (!response.ok) throw new Error('Failed to publish');
+
+                    await response.json();
+                    return siteId;
+                } catch (error) {
+                    console.error('Publish failed:', error);
+                    return null;
+                } finally {
+                    set({ isPublishing: false });
+                }
+            },
 
             // History Actions
             saveToHistory: () => {
@@ -362,7 +429,7 @@ export const useEditorStore = create<EditorStore>()(
                     ],
                     isHomePage: false,
                     minHeight: 600,
-                    height: 1200,
+                    height: 800,
                 };
 
                 set((state) => ({
@@ -412,6 +479,24 @@ export const useEditorStore = create<EditorStore>()(
                 set({ isDragging });
             },
 
+            setSiteId: (siteId) => {
+                set({ siteId });
+            },
+
+            setInitialData: (data) => {
+                const firstPageId = data.pages[0]?.id || 'home';
+                set({
+                    pages: data.pages,
+                    elements: data.elements,
+                    theme: data.theme,
+                    currentPageId: firstPageId,
+                    // Reset history and selection on new data load
+                    history: [],
+                    historyIndex: -1,
+                    selectedElementId: null
+                });
+            },
+
             // Theme Actions
             updateTheme: (updates) => {
                 set((state) => ({
@@ -456,7 +541,9 @@ export const useEditorStore = create<EditorStore>()(
             // Page height management
             setPageHeight: (pageId, height) => {
                 // Ensure all values are numbers (localStorage may store as strings)
-                const numHeight = typeof height === 'string' ? parseInt(height, 10) : height;
+                const rawHeight = typeof height === 'string' ? parseFloat(height) : height;
+                const numHeight = Math.round(rawHeight);
+
                 set((state) => ({
                     pages: state.pages.map((p) => {
                         if (p.id !== pageId) return p;
@@ -473,7 +560,7 @@ export const useEditorStore = create<EditorStore>()(
             expandPageHeightIfNeeded: (elementBottomY) => {
                 const currentPage = get().getCurrentPage();
                 if (currentPage && elementBottomY > currentPage.height - 100) {
-                    const newHeight = elementBottomY + 200;
+                    const newHeight = Math.round(elementBottomY + 200);
                     get().setPageHeight(currentPage.id, newHeight);
                 }
             },
@@ -485,6 +572,7 @@ export const useEditorStore = create<EditorStore>()(
                 pages: state.pages,
                 theme: state.theme,
                 currentPageId: state.currentPageId,
+                layoutMode: state.layoutMode,
             }),
             // Migrate legacy pages and ensure height values are proper numbers
             onRehydrateStorage: () => (state) => {
@@ -493,7 +581,7 @@ export const useEditorStore = create<EditorStore>()(
                     state.pages = state.pages.map(p => ({
                         ...p,
                         minHeight: typeof p.minHeight === 'string' ? parseInt(p.minHeight, 10) : (p.minHeight || 600),
-                        height: typeof p.height === 'string' ? parseInt(p.height, 10) : (p.height || 1200),
+                        height: typeof p.height === 'string' ? parseInt(p.height, 10) : (p.height || 800),
                     }));
                 }
             },
